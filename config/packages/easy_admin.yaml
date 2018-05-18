@@ -35,10 +35,10 @@ easy_admin:
                   fields:
                       - titulo
                       - resumen
-                      - cuerpo
+                      - { property: 'cuerpo', type: 'text' }
                       - publica
                       - portada
-                      - { property: 'imageFile', type: 'file' }
+                      - { property: 'imageFile', type: 'vich_image' }
                       - fecha
                       - tematica
                       - autor_noticia
