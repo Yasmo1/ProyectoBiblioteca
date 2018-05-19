@@ -44,3 +44,14 @@ easy_admin:
                       - autor_noticia
                       - autor_foto_portada
                       - visitas
+           Comentarios:
+               class: App\Entity\Comentarios
+               form:
+                  fields:
+                      - nombre
+                      - { property: 'email', type: 'email' }
+                      - cuerpo_comen
+                      - fecha
+                      - publicado
+                      - noticia_id
+

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -80,6 +82,16 @@ class Noticias
      * @ORM\Column(type="integer", nullable=true)
      */
     private $visitas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comentarios", mappedBy="noticia_id")
+     */
+    private $comentarios;
+
+    public function __construct()
+    {
+        $this->comentarios = new ArrayCollection();
+    }
 
     public function setImageFile(File $image = null)
     {
@@ -233,6 +245,42 @@ class Noticias
         $this->visitas = $visitas;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Comentarios[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(Comentarios $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setNoticiaId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentario(Comentarios $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getNoticiaId() === $this) {
+                $comentario->setNoticiaId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __tostring()
+    {
+        return $this->titulo;
     }
 
 
