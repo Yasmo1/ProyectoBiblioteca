@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,16 @@ class Comentarios
      * @ORM\ManyToOne(targetEntity="App\Entity\Noticias", inversedBy="comentarios")
      */
     private $noticia_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RespuestaComentario", mappedBy="comentario")
+     */
+    private $respuesta;
+
+    public function __construct()
+    {
+        $this->respuesta = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -119,6 +131,37 @@ class Comentarios
     public function setNoticiaId(?Noticias $noticia_id): self
     {
         $this->noticia_id = $noticia_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RespuestaComentario[]
+     */
+    public function getRespuesta(): Collection
+    {
+        return $this->respuesta;
+    }
+
+    public function addRespuestum(RespuestaComentario $respuestum): self
+    {
+        if (!$this->respuesta->contains($respuestum)) {
+            $this->respuesta[] = $respuestum;
+            $respuestum->setComentario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRespuestum(RespuestaComentario $respuestum): self
+    {
+        if ($this->respuesta->contains($respuestum)) {
+            $this->respuesta->removeElement($respuestum);
+            // set the owning side to null (unless already changed)
+            if ($respuestum->getComentario() === $this) {
+                $respuestum->setComentario(null);
+            }
+        }
 
         return $this;
     }
