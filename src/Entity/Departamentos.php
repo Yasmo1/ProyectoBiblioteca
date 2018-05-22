@@ -97,4 +97,9 @@ class Departamentos
 
         return $this;
     }
+
+    public function __tostring()
+    {
+        return $this->nombre;
+    }
 }

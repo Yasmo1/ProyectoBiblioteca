@@ -131,4 +131,9 @@ class Salas
 
         return $this;
     }
+
+    public function __tostring()
+    {
+        return $this->Nombre;
+    }
 }

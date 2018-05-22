@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\NoticiasRepository")
  * @Vich\Uploadable
  */
 class Noticias
@@ -47,7 +47,7 @@ class Noticias
     private $portada;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;

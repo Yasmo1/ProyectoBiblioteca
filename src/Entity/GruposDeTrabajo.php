@@ -94,4 +94,9 @@ class GruposDeTrabajo
 
         return $this;
     }
+
+    public function __tostring()
+    {
+        return $this->nombre;
+    }
 }

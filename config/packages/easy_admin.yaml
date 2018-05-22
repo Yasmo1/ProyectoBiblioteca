@@ -8,6 +8,19 @@ easy_admin:
    site_name: 'CRAI <em style="font-size: 80%;">Administration.</em>'
    design:
            brand_color: '#1ABC9C'
+           menu:
+               - label: 'Noticias'
+                 children:
+                   - { label: 'Noticias', icon: 'list', entity: 'Noticias' }
+                   - { label: 'Comentarios', icon: 'list', entity: 'Comentarios' }
+                   - { label: 'Respuestas a Comentarios', icon: 'list', entity: 'RespuestaComentario' }
+               - label: 'Recursos'
+                 children:
+                   - { label: 'Categorias', icon: 'list', entity: 'CategoriasRecursosInformacion' }
+                   - { label: 'Recursos de la Informacion', icon: 'list', entity: 'RecursosInformacion' }
+
+
+
    formats:
        date:     'd/m/Y'
        time:     'H:i'
@@ -21,8 +34,6 @@ easy_admin:
                    fields:
                      - id
                      - titulo
-                     - resumen
-                     - cuerpo
                      - publica
                      - portada
                      - { property: 'image', type: 'image', base_path: '/files/images' }
@@ -31,11 +42,12 @@ easy_admin:
                      - autor_noticia
                      - autor_foto_portada
                      - visitas
+                     - comentarios
                form:
                   fields:
                       - titulo
                       - resumen
-                      - { property: 'cuerpo', type: 'text' }
+                      - cuerpo
                       - publica
                       - portada
                       - { property: 'imageFile', type: 'vich_image' }
@@ -43,7 +55,6 @@ easy_admin:
                       - tematica
                       - autor_noticia
                       - autor_foto_portada
-                      - visitas
            Comentarios:
                class: App\Entity\Comentarios
                form:
@@ -54,4 +65,36 @@ easy_admin:
                       - fecha
                       - publicado
                       - noticia_id
+           RespuestaComentario:
+               class: App\Entity\RespuestaComentario
+               form:
+                  fields:
+                      - nombre
+                      - { property: 'correo', type: 'email' }
+                      - cuerpoComentario
+                      - fecha
+                      - publicado
+                      - comentario
+           CategoriasRecursosInformacion:
+               class: App\Entity\CategoriasRecursosInformacion
+               form:
+                  fields:
+                      - nombre
+                      - descripcion
+           RecursosInformacion:
+               class: App\Entity\RecursosInformacion
+               list:
+                  fields:
+                      - id
+                      - { property: 'url', type: 'url' }
+                      - { property: 'image', type: 'image', base_path: '/files/imagesRecursosinformacion' }
+                      - nombre
+                      - categoria
+               form:
+                  fields:
+                      - { property: 'url', type: 'url' }
+                      - { property: 'imageFile', type: 'vich_image' }
+                      - nombre
+                      - descripcion
+                      - categoria
 
