@@ -66,6 +66,11 @@ class Quienreserva
      */
     private $sala;
 
+    public function __tostring()
+    {
+        return $this->nombre;
+    }
+
     public function getId()
     {
         return $this->id;

@@ -46,6 +46,11 @@ class Vguiada
      */
     private $cantidadestudiantes;
 
+    public function __tostring()
+    {
+        return $this->nombre;
+    }
+
     public function getId()
     {
         return $this->id;

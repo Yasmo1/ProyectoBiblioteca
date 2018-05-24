@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuariosRepository")
+ * @Vich\Uploadable
  */
 class Usuarios
 {
@@ -37,6 +40,12 @@ class Usuarios
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="imagesfotostrabajadores", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -103,11 +112,54 @@ class Usuarios
      */
     private $quienreservas;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nivelescolar;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $fechanacimiento;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fechaentradosistema;
+
     public function __construct()
     {
         $this->grupodetrabajo = new ArrayCollection();
         $this->planderesultadosindividuales = new ArrayCollection();
         $this->quienreservas = new ArrayCollection();
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->fechaentradosistema = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function getId()
@@ -147,18 +199,6 @@ class Usuarios
     public function setFuncion(?string $funcion): self
     {
         $this->funcion = $funcion;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }
@@ -375,4 +415,42 @@ class Usuarios
     {
         return $this->nombre;
     }
+
+    public function getNivelescolar(): ?string
+    {
+        return $this->nivelescolar;
+    }
+
+    public function setNivelescolar(string $nivelescolar): self
+    {
+        $this->nivelescolar = $nivelescolar;
+
+        return $this;
+    }
+
+    public function getFechanacimiento(): ?\DateTimeInterface
+    {
+        return $this->fechanacimiento;
+    }
+
+    public function setFechanacimiento(\DateTimeInterface $fechanacimiento): self
+    {
+        $this->fechanacimiento = $fechanacimiento;
+
+        return $this;
+    }
+
+    public function getFechaentradosistema(): ?\DateTimeInterface
+    {
+        return $this->fechaentradosistema;
+    }
+
+    public function setFechaentradosistema(?\DateTimeInterface $fechaentradosistema): self
+    {
+        $this->fechaentradosistema = $fechaentradosistema;
+
+        return $this;
+    }
+
+
 }

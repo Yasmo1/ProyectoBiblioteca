@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlanTrabajoMensualRepository")
+ * @Vich\Uploadable
  */
 class PlanTrabajoMensual
 {
@@ -27,9 +30,48 @@ class PlanTrabajoMensual
     private $file;
 
     /**
+     * @Vich\UploadableField(mapping="documentosPTM", fileNameProperty="file")
+     * @var File
+     */
+    private $docFile;
+
+    public function setDocFile(File $doc = null)
+    {
+        $this->docFile = $doc;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($doc) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->fecha = new \DateTime('now');
+        }
+    }
+
+    public function getDocFile()
+    {
+        return $this->docFile;
+    }
+
+    public function setFile($doc)
+    {
+        $this->file = $doc;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
+
+    public function __tostring()
+    {
+        return $this->file;
+    }
 
     public function getId()
     {
@@ -44,18 +86,6 @@ class PlanTrabajoMensual
     public function setFecha(\DateTimeInterface $fecha): self
     {
         $this->fecha = $fecha;
-
-        return $this;
-    }
-
-    public function getFile(): ?string
-    {
-        return $this->file;
-    }
-
-    public function setFile(string $file): self
-    {
-        $this->file = $file;
 
         return $this;
     }

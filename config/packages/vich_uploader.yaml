@@ -9,3 +9,19 @@ vich_uploader:
         imagesRecursosinformacion:
             uri_prefix: /files/imagesRecursosinformacion
             upload_destination: '%kernel.project_dir%/public/files/imagesRecursosinformacion'
+
+        imagesfotostrabajadores:
+            uri_prefix: /files/fotostrabajadores
+            upload_destination: '%kernel.project_dir%/public/files/fotostrabajadores'
+
+        documentoscrai:
+            uri_prefix: /files/documentoscrai
+            upload_destination: '%kernel.project_dir%/public/files/documentoscrai'
+
+        documentosPRI:
+                    uri_prefix: /files/documentosPRI
+                    upload_destination: '%kernel.project_dir%/public/files/documentosPRI'
+
+        documentosPTM:
+                    uri_prefix: /files/documentosPTM
+                    upload_destination: '%kernel.project_dir%/public/files/documentosPTM'
