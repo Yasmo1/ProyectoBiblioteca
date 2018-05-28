@@ -23,8 +23,9 @@ easy_admin:
                  children:
                    - { label: 'Departamentos', icon: 'list', entity: 'Departamentos' }
                    - { label: 'Salas', icon: 'list', entity: 'Salas' }
-                   - { label: 'Usuarios', icon: 'list', entity: 'Usuarios' }
+                   - { label: 'Trabajadores', icon: 'list', entity: 'Usuarios' }
                    - { label: 'Grupos de Trabajo', icon: 'list', entity: 'GruposDeTrabajo' }
+                   - { label: 'Usuarios', icon: 'users', entity: 'User' }
                - { label: '----------------------@@@@@@@@@@---------------------' }
                - { label: 'Documentos', icon: 'list', entity: 'Documentos' }
                - { label: 'Reservas de Salas', icon: 'list', entity: 'Quienreserva' }
@@ -193,7 +194,23 @@ easy_admin:
                       - departamento
                       - grupodetrabajo
                       - EsDocente
-
+           User:
+               class: App\Entity\User
+               list:
+                  fields:
+                      - id
+                      - username
+                      - email
+               form:
+                  fields:
+                      - username
+                      - email
+                      - roles
+                      - enabled
+                      - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                      - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                      - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
 
            Noticias:
                class: App\Entity\Noticias
