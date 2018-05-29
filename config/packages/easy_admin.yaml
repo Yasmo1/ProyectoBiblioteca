@@ -199,11 +199,15 @@ easy_admin:
                list:
                   fields:
                       - id
+                      - trabajador
                       - username
                       - email
+                      - roles
+                      - enabled
                form:
                   fields:
                       - username
+                      - trabajador
                       - email
                       - roles
                       - enabled

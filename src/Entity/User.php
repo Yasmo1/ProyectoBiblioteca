@@ -19,9 +19,26 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Usuarios", cascade={"persist", "remove"})
+     */
+    private $trabajador;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    public function getTrabajador(): ?Usuarios
+    {
+        return $this->trabajador;
+    }
+
+    public function setTrabajador(?Usuarios $trabajador): self
+    {
+        $this->trabajador = $trabajador;
+
+        return $this;
     }
 }
