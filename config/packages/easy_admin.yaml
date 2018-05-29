@@ -5,35 +5,35 @@
 #        - App\Entity\Category
 #        - App\Entity\User
 easy_admin:
-   site_name: 'CRAI <em style="font-size: 80%;">Administration.</em>'
+   site_name: 'CRAI <em style="font-size: 80%;">Administracion.</em>'
    design:
            brand_color: '#1ABC9C'
            form_theme: 'vertical'
            menu:
                - label: 'Noticias'
                  children:
-                   - { label: 'Noticias', icon: 'list', entity: 'Noticias' }
-                   - { label: 'Comentarios', icon: 'list', entity: 'Comentarios' }
-                   - { label: 'Respuestas a Comentarios', icon: 'list', entity: 'RespuestaComentario' }
+                   - { label: 'Categorias', entity: 'TematicaNoticia' }
+                   - { label: 'Noticias', entity: 'Noticias' }
+                   - { label: 'Comentarios', entity: 'Comentarios' }
+                   - { label: 'Respuestas a Comentarios', entity: 'RespuestaComentario' }
                - label: 'Recursos'
                  children:
-                   - { label: 'Categorias', icon: 'list', entity: 'CategoriasRecursosInformacion' }
-                   - { label: 'Recursos de la Informacion', icon: 'list', entity: 'RecursosInformacion' }
+                   - { label: 'Categorias', entity: 'CategoriasRecursosInformacion' }
+                   - { label: 'Recursos de la Informacion', entity: 'RecursosInformacion' }
                - label: 'Departamento'
                  children:
-                   - { label: 'Departamentos', icon: 'list', entity: 'Departamentos' }
-                   - { label: 'Salas', icon: 'list', entity: 'Salas' }
-                   - { label: 'Trabajadores', icon: 'list', entity: 'Usuarios' }
-                   - { label: 'Grupos de Trabajo', icon: 'list', entity: 'GruposDeTrabajo' }
-                   - { label: 'Usuarios', icon: 'users', entity: 'User' }
-               - { label: '----------------------@@@@@@@@@@---------------------' }
-               - { label: 'Documentos', icon: 'list', entity: 'Documentos' }
-               - { label: 'Reservas de Salas', icon: 'list', entity: 'Quienreserva' }
-               - { label: 'Contacto', icon: 'list', entity: 'Contacto' }
-               - { label: 'Visita guiada', icon: 'list', entity: 'Vguiada' }
-               - { label: '----------------------@@@@@@@@@@---------------------' }
-               - { label: 'Plan de Resultados Individuales', icon: 'list', entity: 'PlanResultadosIndividuales' }
-               - { label: 'Plan de Trabajo Mensual', icon: 'list', entity: 'PlanTrabajoMensual' }
+                   - { label: 'Departamentos', entity: 'Departamentos' }
+                   - { label: 'Salas', entity: 'Salas' }
+                   - { label: 'Trabajadores', entity: 'Usuarios' }
+                   - { label: 'Grupos de Trabajo', entity: 'GruposDeTrabajo' }
+                   - { label: 'Usuarios', entity: 'User' }
+
+               - { label: 'Documentos', entity: 'Documentos' }
+               - { label: 'Reservas de Salas', entity: 'Quienreserva' }
+               - { label: 'Contacto', entity: 'Contacto' }
+               - { label: 'Visita guiada', entity: 'Vguiada' }
+               - { label: 'Plan de Resultados Individuales', entity: 'PlanResultadosIndividuales' }
+               - { label: 'Plan de Trabajo Mensual', entity: 'PlanTrabajoMensual' }
    formats:
        date:     'd/m/Y'
        time:     'H:i'
@@ -47,12 +47,15 @@ easy_admin:
                       - id
                       - { property: 'file', type: 'file', base_path: '/files/documentosPTM/' }
                       - fecha
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
-                  help: 'Los nombres de los ficheros no deben ser largos. Maximo 15 caracteres'
                   title: "Nuevo Plan de Resultados Mensual"
                   fields:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
-                      - { property: 'docFile',label: 'Documento', type: 'file' }
+                      - { property: 'docFile',label: 'Documento', type: 'file',  help: 'Los nombres de los ficheros no deben ser largos. Maximo 60 caracteres y menores de 3 MB' }
                       - descripcion
            PlanResultadosIndividuales:
                class: App\Entity\PlanResultadosIndividuales
@@ -63,16 +66,26 @@ easy_admin:
                       - { property: 'file', type: 'file', base_path: '/files/documentosPRI/' }
                       - trabajador
                       - fecha
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
                   title: "Nuevo Plan de Resultados Individuales"
                   fields:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
-                      - { property: 'docFile',label: 'Documento', type: 'file' }
+                      - { property: 'docFile',label: 'Documento', type: 'file', help: 'Los nombres de los ficheros no deben ser largos. Maximo 60 caracteres y menores de 3 MB' }
                       - trabajador
                       - { type: 'group', css_class: 'col-sm-4', label: 'Comentario' }
                       - descripcion
            Vguiada:
                class: App\Entity\Vguiada
+               list:
+                  title: "Visitas Guiadas"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
                   title: "Nueva Visita guiada"
                   fields:
@@ -86,6 +99,12 @@ easy_admin:
                       - cantidadestudiantes
            Contacto:
                class: App\Entity\Contacto
+               list:
+                  title: "Contactos"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
                   title: "Nuevo Contacto"
                   fields:
@@ -111,6 +130,10 @@ easy_admin:
                       - horainicio
                       - horafin
                       - { property: 'cantidadparticipantes', label: 'Cantidad de Participantes' }
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
                   title: "Reservar Sala"
                   fields:
@@ -130,29 +153,66 @@ easy_admin:
            Documentos:
                class: App\Entity\Documentos
                list:
+                  title: "Documentos"
                   fields:
                       - id
                       - nombre
                       - { property: 'file', type: 'file', base_path: '/files/documentoscrai/' }
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
-                      - { property: 'docFile',label: 'Documento', type: 'file' }
+                      - { property: 'docFile',label: 'Documento', type: 'file', help: 'Los nombres de los ficheros no deben ser largos. Maximo 60 caracteres y menores de 3 MB' }
                       - descripcion
            GruposDeTrabajo:
                class: App\Entity\GruposDeTrabajo
+               list:
+                  title: "Grupos de trabajo"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nuevo Grupo de Trabajo"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
                       - descripcion
            Departamentos:
                class: App\Entity\Departamentos
+               list:
+                  title: "Departamentos"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nuevo Departamento"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
                       - descripcion
            Salas:
                class: App\Entity\Salas
+               list:
+                  title: "Salas"
+                  actions:
+                     - { name: 'show', icon: 'search', label: ' ' }
+                     - { name: 'edit', icon: 'edit', label: ' '}
+                     - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                   title: "Nueva Sala"
+                   fields:
+                     - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                     - Nombre
+                     - Capacidad
+                     - responsable
+                     - { type: 'group', css_class: 'col-sm-4', label: 'Descripcion' }
+                     - descripcion
            Usuarios:
                class: App\Entity\Usuarios
                list:
@@ -170,15 +230,19 @@ easy_admin:
                      - categoriadocente
                      - CategoriaCientifica
                      - grupodetrabajo
-
+                   actions:
+                     - { name: 'show', icon: 'search', label: ' ' }
+                     - { name: 'edit', icon: 'edit', label: ' '}
+                     - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
 
                form:
+                  title: "Nuevo trabajador"
                   fields:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion Personal', icon: 'user' }
                       - DNI
                       - { property: 'nombre', label: 'Nombre', type: 'text' }
-                      - { property: 'EstadoCivil', label: 'Estado Civil', type: 'text' }
-                      - { property: 'nivelescolar', label: 'Nivel Escolar', type: 'text' }
+                      - { property: 'EstadoCivil', label: 'Estado Civil', type: 'choice', type_options: { multiple: false, choices: { 'Casado(a)': 'Casado(a)', 'Soltero(a)': 'Soltero(a)' } } }
+                      - { property: 'nivelescolar', label: 'Nivel Escolar', type: 'choice', type_options: { multiple: false, choices: { 'Tecnico Medio': 'Tecnico Medio', 'Bachiller': 'Bachiller', 'Superior': 'Superior' } } }
                       - { property: 'fechanacimiento', label: 'Fecha de Nacimiento', type: 'date' }
                       - { property: 'imageFile', type: 'vich_image' }
                       - { type: 'group', label: 'Informacion de Contacto', icon: 'phone', css_class: 'col-sm-4' }
@@ -189,14 +253,15 @@ easy_admin:
                       - { type: 'group', label: 'Informacion Laboral y Profesional', icon: 'work', css_class: 'col-sm-4' }
                       - { property: 'cargo', label: 'Cargo', type: 'text' }
                       - { property: 'funcion', label: 'Funcion que realiza', type: 'text' }
-                      - { property: 'categoriadocente', label: 'Categoria Docente', type: 'text' }
-                      - { property: 'CategoriaCientifica', label: 'Categoria Cientifica', type: 'text' }
+                      - { property: 'categoriadocente', label: 'Categoria Docente', type: 'choice', type_options: { multiple: false, choices: { 'Profesor Instructor': 'Profesor Instructor', 'Profesor Asistente': 'Profesor Asistente', 'Profesor Auxiliar': 'Profesor Auxiliar', 'Profesor Titular': 'Profesor Titular' } } }
+                      - { property: 'CategoriaCientifica', label: 'Categoria Cientifica',  type: 'choice', type_options: { multiple: false, choices: { 'Dr. C.  (Doctor en ciencias pedagogicas)': 'Dr. C.  (Doctor en ciencias pedagogicas)', 'Dr. Cs. (Doctor en ciencias)': 'Dr. Cs. (Doctor en ciencias)', 'MSc. o M.Sc. (Especialidad o maestria:)': 'MSc. o M.Sc. (Especialidad o maestria:)'} } }
                       - departamento
                       - grupodetrabajo
                       - EsDocente
            User:
                class: App\Entity\User
                list:
+                  title: "Usuarios"
                   fields:
                       - id
                       - trabajador
@@ -204,23 +269,45 @@ easy_admin:
                       - email
                       - roles
                       - enabled
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nuevo Usuario"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-6', label: 'Informacion' }
                       - username
+                      - { property: 'plainPassword', label: 'Password', type: 'text', type_options: { required: false } }
                       - trabajador
                       - email
-                      - roles
+                      - { type: 'group', css_class: 'col-sm-6', label: 'Otros' }
                       - enabled
                       - lastLogin
+                      - roles
                     # if administrators are allowed to edit users' passwords and roles, add this:
-                      - { property: 'plainPassword', type: 'text', type_options: { required: false } }
                       - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
 
+
+           TematicaNoticia:
+               class: App\Entity\TematicaNoticia
+               list:
+                  title: "Categorias"
+                  actions:
+                    - { name: 'show', icon: 'search', label: ' ' }
+                    - { name: 'edit', icon: 'edit', label: ' '}
+                    - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Categoria"
+                  fields:
+                     - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                     - nombre
+                     - descripcion
            Noticias:
                class: App\Entity\Noticias
                label: 'Noticias'
                list:
-                   title: "Lista de Noticias"
+                   title: "Noticias"
                    fields:
                      - id
                      - titulo
@@ -228,27 +315,41 @@ easy_admin:
                      - portada
                      - { property: 'image', type: 'image', base_path: '/files/images' }
                      - { property: 'fecha', type: 'datetime'}
-                     - tematica
-                     - autor_noticia
-                     - autor_foto_portada
+                     - categoria
                      - visitas
                      - comentarios
+                   actions:
+                     - { name: 'show', icon: 'search', label: ' ' }
+                     - { name: 'edit', icon: 'edit', label: ' '}
+                     - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nueva Noticia"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-6', label: 'Informacion' }
                       - titulo
-                      - resumen
-                      - cuerpo
+                      - autor_foto_portada
                       - publica
                       - portada
-                      - { property: 'imageFile', type: 'vich_image' }
                       - fecha
-                      - tematica
+                      - categoria
                       - autor_noticia
-                      - autor_foto_portada
+                      - { type: 'group', css_class: 'col-sm-6', label: 'Resumen e Imagen' }
+                      - resumen
+                      - { property: 'imageFile', type: 'vich_image' }
+                      - { type: 'group', css_class: 'col-sm-12', label: 'Cuerpo' }
+                      - cuerpo
            Comentarios:
                class: App\Entity\Comentarios
+               list:
+                  title: "Comentarios"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nuevo Comentario"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
                       - { property: 'email', type: 'email' }
                       - cuerpo_comen
@@ -257,8 +358,16 @@ easy_admin:
                       - noticia_id
            RespuestaComentario:
                class: App\Entity\RespuestaComentario
+               list:
+                  title: "Respuesta a Comentarios"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nueva Respuesta a Cometario"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
                       - { property: 'correo', type: 'email' }
                       - cuerpoComentario
@@ -267,21 +376,36 @@ easy_admin:
                       - comentario
            CategoriasRecursosInformacion:
                class: App\Entity\CategoriasRecursosInformacion
+               list:
+                  title: "Categorias de Recursos de la Informacion"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nueva Categoria"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - nombre
                       - descripcion
            RecursosInformacion:
                class: App\Entity\RecursosInformacion
                list:
+                  title: "Recursos de la Informacion"
                   fields:
                       - id
                       - { property: 'url', type: 'url' }
                       - { property: 'image', type: 'image', base_path: '/files/imagesRecursosinformacion' }
                       - nombre
                       - categoria
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
                form:
+                  title: "Nuevo Recurso"
                   fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - { property: 'url', type: 'url' }
                       - { property: 'imageFile', type: 'vich_image' }
                       - nombre

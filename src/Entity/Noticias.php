@@ -64,7 +64,7 @@ class Noticias
     private $fecha;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $tematica;
 
@@ -87,6 +87,11 @@ class Noticias
      * @ORM\OneToMany(targetEntity="App\Entity\Comentarios", mappedBy="noticia_id")
      */
     private $comentarios;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TematicaNoticia", inversedBy="noticias")
+     */
+    private $categoria;
 
     public function __construct()
     {
@@ -281,6 +286,18 @@ class Noticias
     public function __tostring()
     {
         return $this->titulo;
+    }
+
+    public function getCategoria(): ?TematicaNoticia
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(?TematicaNoticia $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
     }
 
 
