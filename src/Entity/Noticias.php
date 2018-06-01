@@ -285,7 +285,7 @@ class Noticias
 
     public function __tostring()
     {
-        return $this->titulo;
+        return (string)$this->titulo;
     }
 
     public function getCategoria(): ?TematicaNoticia

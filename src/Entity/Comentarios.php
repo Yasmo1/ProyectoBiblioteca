@@ -168,6 +168,6 @@ class Comentarios
 
     public function __tostring()
     {
-        return $this->nombre;
+        return (string)$this->nombre;
     }
 }

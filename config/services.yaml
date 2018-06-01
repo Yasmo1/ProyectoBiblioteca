@@ -29,3 +29,28 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    admin.TematicaNoticia:
+        class: App\Admin\TematicaNoticiaAdmin
+        arguments: [~, App\Entity\TematicaNoticia, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Categorias Noticias }
+        public: true
+    admin.Comentarios:
+        class: App\Admin\ComentariosAdmin
+        arguments: [~, App\Entity\Comentarios, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Comentarios }
+        public: true
+    admin.Noticias:
+        class: App\Admin\NoticiasAdmin
+        arguments: [~, App\Entity\Noticias, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Noticias }
+        public: true
+    admin.RespuestaComentario:
+        class: App\Admin\RespuestaComentarioAdmin
+        arguments: [~, App\Entity\RespuestaComentario, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Respuesta a Comentarios }
+        public: true
