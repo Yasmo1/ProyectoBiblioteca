@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class NoticiasAdmin extends AbstractAdmin
 {
@@ -38,7 +39,7 @@ class NoticiasAdmin extends AbstractAdmin
             ->add('imageFile', VichImageType::class)
             ->end()
             ->with('Cuerpo', ['class' => 'col-md-12'])
-            ->add('cuerpo', TextareaType::class)
+            ->add('cuerpo', CKEditorType::class)
             ->end()
 
         ;
