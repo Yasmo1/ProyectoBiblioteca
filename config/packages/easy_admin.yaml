@@ -286,7 +286,7 @@ easy_admin:
                       - lastLogin
                       - roles
                     # if administrators are allowed to edit users' passwords and roles, add this:
-                      - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+                      - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER','ROLE_EDITOR': 'ROLE_EDITOR', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
 
 
            TematicaNoticia:
