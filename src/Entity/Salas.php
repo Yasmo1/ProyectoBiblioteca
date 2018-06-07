@@ -43,6 +43,11 @@ class Salas
      */
     private $reservasala;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Biblioteca", inversedBy="salas")
+     */
+    private $biblioteca;
+
     public function __construct()
     {
         $this->reservasala = new ArrayCollection();
@@ -134,6 +139,18 @@ class Salas
 
     public function __tostring()
     {
-        return $this->Nombre;
+        return (string)$this->Nombre;
+    }
+
+    public function getBiblioteca(): ?Biblioteca
+    {
+        return $this->biblioteca;
+    }
+
+    public function setBiblioteca(?Biblioteca $biblioteca): self
+    {
+        $this->biblioteca = $biblioteca;
+
+        return $this;
     }
 }

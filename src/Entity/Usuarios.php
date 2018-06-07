@@ -127,11 +127,29 @@ class Usuarios
      */
     private $fechaentradosistema;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\AsignaturaServicioPregrado", mappedBy="profesores")
+     */
+    private $asignaturaServicioPregrados;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Investigaciones", mappedBy="JefeProyecto")
+     */
+    private $investigaciones;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PII", mappedBy="JefeProyecto")
+     */
+    private $pIIs;
+
     public function __construct()
     {
         $this->grupodetrabajo = new ArrayCollection();
         $this->planderesultadosindividuales = new ArrayCollection();
         $this->quienreservas = new ArrayCollection();
+        $this->asignaturaServicioPregrados = new ArrayCollection();
+        $this->investigaciones = new ArrayCollection();
+        $this->pIIs = new ArrayCollection();
     }
 
     public function setImageFile(File $image = null)
@@ -448,6 +466,96 @@ class Usuarios
     public function setFechaentradosistema(?\DateTimeInterface $fechaentradosistema): self
     {
         $this->fechaentradosistema = $fechaentradosistema;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AsignaturaServicioPregrado[]
+     */
+    public function getAsignaturaServicioPregrados(): Collection
+    {
+        return $this->asignaturaServicioPregrados;
+    }
+
+    public function addAsignaturaServicioPregrado(AsignaturaServicioPregrado $asignaturaServicioPregrado): self
+    {
+        if (!$this->asignaturaServicioPregrados->contains($asignaturaServicioPregrado)) {
+            $this->asignaturaServicioPregrados[] = $asignaturaServicioPregrado;
+            $asignaturaServicioPregrado->addProfesore($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAsignaturaServicioPregrado(AsignaturaServicioPregrado $asignaturaServicioPregrado): self
+    {
+        if ($this->asignaturaServicioPregrados->contains($asignaturaServicioPregrado)) {
+            $this->asignaturaServicioPregrados->removeElement($asignaturaServicioPregrado);
+            $asignaturaServicioPregrado->removeProfesore($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Investigaciones[]
+     */
+    public function getInvestigaciones(): Collection
+    {
+        return $this->investigaciones;
+    }
+
+    public function addInvestigacione(Investigaciones $investigacione): self
+    {
+        if (!$this->investigaciones->contains($investigacione)) {
+            $this->investigaciones[] = $investigacione;
+            $investigacione->setJefeProyecto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvestigacione(Investigaciones $investigacione): self
+    {
+        if ($this->investigaciones->contains($investigacione)) {
+            $this->investigaciones->removeElement($investigacione);
+            // set the owning side to null (unless already changed)
+            if ($investigacione->getJefeProyecto() === $this) {
+                $investigacione->setJefeProyecto(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PII[]
+     */
+    public function getPIIs(): Collection
+    {
+        return $this->pIIs;
+    }
+
+    public function addPII(PII $pII): self
+    {
+        if (!$this->pIIs->contains($pII)) {
+            $this->pIIs[] = $pII;
+            $pII->setJefeProyecto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePII(PII $pII): self
+    {
+        if ($this->pIIs->contains($pII)) {
+            $this->pIIs->removeElement($pII);
+            // set the owning side to null (unless already changed)
+            if ($pII->getJefeProyecto() === $this) {
+                $pII->setJefeProyecto(null);
+            }
+        }
 
         return $this;
     }

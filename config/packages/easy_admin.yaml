@@ -10,12 +10,32 @@ easy_admin:
            brand_color: '#1ABC9C'
            form_theme: 'vertical'
            menu:
+               - label: 'Bibliotecas'
+                 children:
+                   - { label: 'Servicios', entity: 'ServiciosBiblioteca' }
+                   - { label: 'Bibliotecas', entity: 'Biblioteca' }
+                   - { label: 'Salas', entity: 'Salas' }
+               - label: 'Formacion'
+                 children:
+                   - { label: 'Pregrado'}
+                   - { label: 'Carreras', entity: 'Carrera' }
+                   - { label: 'Asignaturas', entity: 'AsignaturaServicioPregrado' }
+                   - { label: 'Semestre', entity: 'Semestre' }
+                   - { label: 'Postgrado'}
+                   - { label: 'Tipo de Actividades', entity: 'TipoActividadPostgrado'}
+                   - { label: 'Actividades', entity: 'ActividadPostgrado'}
+                   - { label: 'Organismos/instituciones', entity: 'OrganismosPostgrado'}
+               - label: 'Investigaciones'
+                 children:
+                   - { label: 'Investigaciones', entity: 'Investigaciones' }
+                   - { label: 'Proyectos', entity: 'PII' }
+                   - { label: 'Resultados', entity: 'Resultados' }
                - label: 'Noticias'
                  children:
-                   - { label: 'Categorias', entity: 'TematicaNoticia' }
-                   - { label: 'Noticias', entity: 'Noticias' }
-                   - { label: 'Comentarios', entity: 'Comentarios' }
-                   - { label: 'Respuestas a Comentarios', entity: 'RespuestaComentario' }
+                    - { label: 'Categorias', entity: 'TematicaNoticia' }
+                    - { label: 'Noticias', entity: 'Noticias' }
+                    - { label: 'Comentarios', entity: 'Comentarios' }
+                    - { label: 'Respuestas a Comentarios', entity: 'RespuestaComentario' }
                - label: 'Recursos'
                  children:
                    - { label: 'Categorias', entity: 'CategoriasRecursosInformacion' }
@@ -23,7 +43,6 @@ easy_admin:
                - label: 'Departamento'
                  children:
                    - { label: 'Departamentos', entity: 'Departamentos' }
-                   - { label: 'Salas', entity: 'Salas' }
                    - { label: 'Trabajadores', entity: 'Usuarios' }
                    - { label: 'Grupos de Trabajo', entity: 'GruposDeTrabajo' }
                    - { label: 'Usuarios', entity: 'User' }
@@ -39,6 +58,205 @@ easy_admin:
        time:     'H:i'
        datetime: 'd/m/Y H:i:s'
    entities:
+           Investigaciones:
+               class: App\Entity\Investigaciones
+               list:
+                  title: "Investigaciones"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Investigacion"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'Tema', label: 'Tema', type: 'text' }
+                      - { property: 'Tipo', label: 'Tipo', type: 'choice', type_options: { multiple: false, choices: { 'Maestria': 'Maestria', 'Doctorado': 'Doctorado' } } }
+                      - JefeProyecto
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
+                      - fechainicio
+                      - fechafin
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           PII:
+               class: App\Entity\PII
+               list:
+                  title: "Proyectos"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Proyecto"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { property: 'Alias', label: 'Alias', type: 'text', help: 'PI-42' }
+                      - { property: 'tipo', label: 'Tipo', type: 'choice', type_options: { multiple: false, choices: { 'Proyecto de Interes Institucional': 'Proyecto de Interes Institucional', 'Proyecto Internacional': 'Proyecto Internacional' } } }
+                      - JefeProyecto
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           Resultados:
+               class: App\Entity\Resultados
+               list:
+                  title: "Resultados"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Resultado"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'proyecto', label: 'Proyecto', type: 'text' }
+                      - { property: 'Resultado', label: 'Resultado', type: 'text' }
+                      - { property: 'autor', label: 'Autor', type: 'text' }
+                      - { property: 'autor', label: 'Autor', type: 'text' }
+                      - { property: 'tiporesultado', label: 'Tipo', type: 'choice', type_options: { multiple: false, choices: { 'Maestria': 'Maestria', 'Doctorado': 'Doctorado' } } }
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
+                      - fechainicio
+                      - fechafin
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - relevancia
+           OrganismosPostgrado:
+               class: App\Entity\OrganismosPostgrado
+               list:
+                  title: "Organismos/instituciones"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Organismos/instituciones"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { property: 'telefono', label: 'Telefono', type: 'text', help: '48 75-50-24' }
+                      - actividades
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - direccion
+           Semestre:
+               class: App\Entity\Semestre
+               list:
+                  title: "Semestres"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Semestre"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text', help: 'Segundo semestre del 2016/17' }
+                      - asignaturas
+                      - descripcion
+           TipoActividadPostgrado:
+               class: App\Entity\TipoActividadPostgrado
+               list:
+                  title: "Tipos de Actividades Postgrado"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Tipo Actividad de Postgrado"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - descripcion
+           ActividadPostgrado:
+               class: App\Entity\ActividadPostgrado
+               list:
+                  title: "Actividades Postgrado"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Tipo Actividad de Postgrado"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { type: 'section', label: 'Periodo' }
+                      - { property: 'fechainicio', label: 'Fecha de Inicio', type: 'datetime' }
+                      - { property: 'fechafin', label: 'Fecha de Finalizacion', type: 'datetime' }
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { type: 'section', label: 'Organismos/instituciones que lo solicitan:' }
+                      - organismosPostgrados
+                      - { type: 'section', label: 'Tipo de Actividad de Postgrado:' }
+                      - tipoactividadpostgrado
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           Carrera:
+               class: App\Entity\Carrera
+               list:
+                  title: "Carreras"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Carrera"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - nombre
+                      - asignaturas
+                      - descripcion
+           AsignaturaServicioPregrado:
+               class: App\Entity\AsignaturaServicioPregrado
+               list:
+                  title: "Servicios que ofrecen las bibliotecas a Pregrado"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Servicio de Pregrado"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - nombre
+                      - profesores
+                      - carreras
+                      - semestres
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Descripcion' }
+                      - descripcion
+           ServiciosBiblioteca:
+               class: App\Entity\ServiciosBiblioteca
+               list:
+                  title: "Servicios que ofrecen las bibliotecas"
+                  fields:
+                      - id
+                      - nombre
+                      - bibliotecas
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Servicio"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - bibliotecas
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           Biblioteca:
+               class: App\Entity\Biblioteca
+               list:
+                  title: "Bibliotecas"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Biblioteca"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { property: 'horario', label: 'Horario', type: 'text', help: 'Lunes a viernes 8:00am-5:00pm, Sabado: 8:00am-12:00m' }
+                      - servicios
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
            PlanTrabajoMensual:
                class: App\Entity\PlanTrabajoMensual
                list:
@@ -211,6 +429,7 @@ easy_admin:
                      - Nombre
                      - Capacidad
                      - responsable
+                     - biblioteca
                      - { type: 'group', css_class: 'col-sm-4', label: 'Descripcion' }
                      - descripcion
            Usuarios:

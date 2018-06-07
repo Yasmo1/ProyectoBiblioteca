@@ -3,8 +3,13 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_USER:         ROLE_USER
+        ROLE_EDITOR:       ROLE_EDITOR
+        ROLE_ADMIN:        [ROLE_ADMIN, ROLE_EDITOR, ROLE_USER]
+        ROLE_SUPER_ADMIN:  [ROLE_ADMIN]
+
+            # set access_strategy to unanimous, else you may have unexpected behaviors
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
@@ -36,6 +41,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/seguroadmin, role: ROLE_ADMIN }
-        #- { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/seguroadmin, roles: [ROLE_ADMIN] }
+        - { path: ^/adminoticias, roles: [ROLE_USER, ROLE_EDITOR] }
         # - { path: ^/profile, roles: ROLE_USER }
