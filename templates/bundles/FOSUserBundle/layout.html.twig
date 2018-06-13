@@ -1,5 +1,8 @@
-{% block title %}Demo Application{% endblock %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% block title %}Demo Application{% endblock %}
 
-{% block content %}
-    {% block fos_user_content %}{% endblock %}
-{% endblock %}
+    {% block content %}
+        {% block fos_user_content %}{% endblock %}
+    {% endblock %}
+ {% endblock %}

@@ -10,6 +10,14 @@ easy_admin:
            brand_color: '#1ABC9C'
            form_theme: 'vertical'
            menu:
+               - label: 'CRAI'
+                 children:
+                   - { label: 'Departamentos', entity: 'Departamentos' }
+                   - { label: 'Trabajadores', entity: 'Usuarios' }
+                   - { label: 'Grupos de Trabajo', entity: 'GruposDeTrabajo' }
+                   - { label: 'Usuarios', entity: 'User' }
+                   - { label: 'Sitios Web', entity: 'SitiosWebCRAI' }
+                   - { label: 'Tecnologias', entity: 'Tecnologias' }
                - label: 'Bibliotecas'
                  children:
                    - { label: 'Servicios', entity: 'ServiciosBiblioteca' }
@@ -40,12 +48,7 @@ easy_admin:
                  children:
                    - { label: 'Categorias', entity: 'CategoriasRecursosInformacion' }
                    - { label: 'Recursos de la Informacion', entity: 'RecursosInformacion' }
-               - label: 'Departamento'
-                 children:
-                   - { label: 'Departamentos', entity: 'Departamentos' }
-                   - { label: 'Trabajadores', entity: 'Usuarios' }
-                   - { label: 'Grupos de Trabajo', entity: 'GruposDeTrabajo' }
-                   - { label: 'Usuarios', entity: 'User' }
+
 
                - { label: 'Documentos', entity: 'Documentos' }
                - { label: 'Reservas de Salas', entity: 'Quienreserva' }
@@ -76,6 +79,52 @@ easy_admin:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
                       - fechainicio
                       - fechafin
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           Tecnologias:
+               class: App\Entity\Tecnologias
+               list:
+                  title: "Tecnologias"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Tecnologia"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - especialistas
+                      - sitiosWebCRAIs
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           SitiosWebCRAI:
+               class: App\Entity\SitiosWebCRAI
+               list:
+                  title: "Sitios Web"
+                  fields:
+                      - id
+                      - nombre
+                      - { property: 'url', type: 'url' }
+                      - administrador
+                      - tecnologias
+                      - { property: 'ipmontadoservicio', label: 'Ip Servidor' }
+                      - { property: 'imagenportada', label: 'Portada del Sitio', type: 'image', base_path: '/files/imagesSitiosWeb' }
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuevo Sitio Web"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { property: 'url', type: 'url' }
+                      - { property: 'imageFile', type: 'vich_image' }
+                      - administrador
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
+                      - tecnologias
+                      - { property: 'ipmontadoservicio', label: 'Ip Servidor', type: 'text', help: '10.2.24.186' }
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - descripcion
            PII:

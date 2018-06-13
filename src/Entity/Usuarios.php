@@ -142,6 +142,16 @@ class Usuarios
      */
     private $pIIs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SitiosWebCRAI", mappedBy="administrador")
+     */
+    private $sitiosWebCRAIs;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tecnologias", mappedBy="especialistas")
+     */
+    private $tecnologias;
+
     public function __construct()
     {
         $this->grupodetrabajo = new ArrayCollection();
@@ -150,6 +160,8 @@ class Usuarios
         $this->asignaturaServicioPregrados = new ArrayCollection();
         $this->investigaciones = new ArrayCollection();
         $this->pIIs = new ArrayCollection();
+        $this->sitiosWebCRAIs = new ArrayCollection();
+        $this->tecnologias = new ArrayCollection();
     }
 
     public function setImageFile(File $image = null)
@@ -555,6 +567,65 @@ class Usuarios
             if ($pII->getJefeProyecto() === $this) {
                 $pII->setJefeProyecto(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SitiosWebCRAI[]
+     */
+    public function getSitiosWebCRAIs(): Collection
+    {
+        return $this->sitiosWebCRAIs;
+    }
+
+    public function addSitiosWebCRAI(SitiosWebCRAI $sitiosWebCRAI): self
+    {
+        if (!$this->sitiosWebCRAIs->contains($sitiosWebCRAI)) {
+            $this->sitiosWebCRAIs[] = $sitiosWebCRAI;
+            $sitiosWebCRAI->setAdministrador($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSitiosWebCRAI(SitiosWebCRAI $sitiosWebCRAI): self
+    {
+        if ($this->sitiosWebCRAIs->contains($sitiosWebCRAI)) {
+            $this->sitiosWebCRAIs->removeElement($sitiosWebCRAI);
+            // set the owning side to null (unless already changed)
+            if ($sitiosWebCRAI->getAdministrador() === $this) {
+                $sitiosWebCRAI->setAdministrador(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tecnologias[]
+     */
+    public function getTecnologias(): Collection
+    {
+        return $this->tecnologias;
+    }
+
+    public function addTecnologia(Tecnologias $tecnologia): self
+    {
+        if (!$this->tecnologias->contains($tecnologia)) {
+            $this->tecnologias[] = $tecnologia;
+            $tecnologia->addEspecialista($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTecnologia(Tecnologias $tecnologia): self
+    {
+        if ($this->tecnologias->contains($tecnologia)) {
+            $this->tecnologias->removeElement($tecnologia);
+            $tecnologia->removeEspecialista($this);
         }
 
         return $this;
