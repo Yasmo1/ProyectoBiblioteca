@@ -13,7 +13,7 @@ class FrontendController extends Controller
     public function index()
     {
         return $this->render('frontend/index.html.twig', [
-            'controller_name' => 'FrontendController',
+            'controller_name' => 'Inicio',
         ]);
     }
 }
