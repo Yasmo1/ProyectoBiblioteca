@@ -1,0 +1,8 @@
+#ck_editor:
+#    input_sync: true
+#    default_config: simple_config
+#    configs:
+#        simple_config:
+#            toolbar: standard
+#            allowedContent: true
+#            extraAllowedContent : ['span body head footer container i *(*) *{*}']
