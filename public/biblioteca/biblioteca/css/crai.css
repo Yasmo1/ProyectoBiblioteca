@@ -1,0 +1,210 @@
+@font-face {
+    font-family: fuente_Noticia;
+    src: url(../fonts/Gotham-Book.ttf);
+    font-size: 16pt;
+}
+@font-face {
+    font-family: Book-14;
+    src: url(../fonts/Gotham-Book.ttf);
+    font-size: 14pt;
+}
+@font-face {
+    font-family: Book-36;
+    src: url(../fonts/Gotham-Book.ttf);
+    font-size: 36pt;
+}
+@font-face {
+    font-family: BookItalic;
+    src: url(../fonts/Gotham-BookItalic.ttf);
+    font-size: 16pt;
+}
+@font-face {
+    font-family: fuente_Menu;
+    src: url(../fonts/Gotham-Book.ttf);
+    font-size: 18pt;
+    font-style: normal;
+}
+@font-face {
+    font-family: fuente_Buscar;
+    src: url(../fonts/Gotham-Light.ttf);
+    font-size: 28pt;
+    font-style: normal;
+}
+@font-face {
+    font-family: fuente_Enunciado_Noticias;
+    src: url(../fonts/Gotham-Book.ttf);
+    font-size: 24pt;
+    font-style: normal;
+}
+@font-face {
+    font-family: Gotham-Bold-16;
+    src: url(../fonts/Gotham-Bold.ttf);
+    font-size: 16pt;
+}
+@font-face {
+    font-family: Gotham-BoldItalic-16;
+    src: url(../fonts/Gotham-BoldItalic.ttf);
+    font-size: 16pt;
+}
+.Estilo_Loquin{
+    font-family: Book-36;
+    color: #001eff;
+}
+.Estilo_Loquin1{
+    font-family: Book-36;
+    color: #787878;
+}
+.Estilo_btn_Form{
+    font-family: fuente_Enunciado_Noticias;
+    color: #FFFFFF;
+    background-color: #aeaeae;
+}
+
+.Estilo_Vista_Servicios_Servicios{
+    font-family: Book-14;
+    color: #4e4e4e;
+}
+.Estilo_Menu{
+    font-family: fuente_Menu;
+    font-size: 12pt;
+    padding: 7px;
+    background-color: #0d6aad;
+}
+.Estilo_Buscar{
+    font-family: fuente_Buscar;
+
+}
+.Estilo_Enunciado_Noticias{
+    font-family: fuente_Enunciado_Noticias;
+    color: #001eff;
+}
+.Estilo_Enunciado_Noticias_Portada{
+    font-family: fuente_Enunciado_Noticias;
+    color: #001eff;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+/*.Estilo_Enunciado_Noticias_Portada:hover {
+    width: 100%;
+    white-space: initial;
+    overflow:visible;
+    cursor: pointer;
+}*/
+.Estilo_Noticias{
+    font-family: fuente_Noticia;
+    color: #000000;
+}
+.Estilo_Pie_Pagina{
+    font-family: fuente_Noticia;
+    color: #2a2a2a;
+}
+.circulo {
+    width: 40px;
+    height: 40px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #dfdfdf;
+    border: 3px solid #2a2a2a;
+}
+.circulo1 {
+    width: 40px;
+    height: 40px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #2a2a2a;
+}
+.Estilo_Noticias_Portada{
+    font-family: fuente_Noticia;
+    color: #000000;
+    display: block; /* Fallback for non-webkit */
+    /*display: -webkit-box;
+    max-width: 400px;
+    height: 67.5px; /* Fallback for non-webkit */
+    /*margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;*/
+}
+.Estilo_Noticias_Portada1{
+    font-family: fuente_Noticia;
+    color: #000000;
+    display: block; /* Fallback for non-webkit */
+    /*display: -webkit-box;
+    max-width: 550px;
+    height: 112.5px; /* Fallback for non-webkit */
+    /* margin: 0 auto;
+     font-size: 15px;
+     line-height: 1.5;
+     -webkit-line-clamp: 5;
+     -webkit-box-orient: vertical;
+     overflow: hidden;
+     text-overflow: ellipsis;
+
+     -webkit-transition: all 1s;
+     -moz-transition: all 1s;
+     transition: all 1s;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;*/
+}
+/*.Estilo_Noticias_Portada1:hover {
+    width: 100%;
+    white-space: initial;
+    overflow:visible;
+    cursor: pointer;
+}
+.Estilo_Noticias_Portada:hover {
+    width: 100%;
+    white-space: initial;
+    overflow:visible;
+    cursor: pointer;
+}*/
+.Estilo_Noticias_Azul{
+    font-family: fuente_Noticia;
+    color: #001eff;
+}
+.Estilo_Enunciado_Quienes_Somos_Equipo_TRabajo{
+    font-family: fuente_Enunciado_Noticias;
+    color: #ffffff;
+}
+.Estilo_Enunciado_Quienes_Somos_Trabajadores{
+    font-family: fuente_Noticia;
+    color: #ffffff;
+}
+.Estilo_Enunciado_Quienes_Somos_Trabajadores_Bold{
+    font-family: Gotham-Bold-16;
+    font-style: normal;
+    color: #ffffff;
+}
+.Estilo_Enunciado_Biblioteca_MasInformacion_Bold{
+    font-family: Gotham-BoldItalic-16;
+    color: #000000;
+}
+.Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold{
+    font-family: BookItalic;
+    color: #000000;
+}
+.Estilo_Enunciado_Servicios_Principales{
+    font-family: fuente_Enunciado_Noticias;
+    color: #000000;
+}
+.Estilo_Servicios_Principales{
+    font-family: fuente_Noticia;
+    color: #000000;
+    padding-bottom: 10px;
+}
+.Estilo_Servicios_Principales_Enunciado{
+    font-family: Gotham-Bold-16;
+    color: #000000;
+}

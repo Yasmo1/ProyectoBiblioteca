@@ -3,17 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}CRAI{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('build/ICon.ico') }}"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('ICon.ico') }}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('build/css/crai.css') }}">
+        <link href="{{ asset('biblioteca/bootstrap-3.3.7-dist/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('biblioteca/font-awesome-4.7.0/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('biblioteca/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('biblioteca/bootstrap-3.3.7-dist/css/bootstrap-theme.css') }}" rel="stylesheet">
+        <link href="{{ asset('biblioteca/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+
+        <link href="{{ asset('biblioteca/biblioteca/css/MiCSS.css') }}" rel="stylesheet">
+
+        <script src="{{ asset('biblioteca/bootstrap-3.3.7-dist/js/jquery-2.1.1.min.js') }}"></script>
+        <script src="{{ asset('biblioteca/bootstrap-3.3.7-dist/js/bootstrap.js') }}"></script>
+
+        <script src="{# asset('bundles/bootstrap-3.3.7-dist/js/bootstrap.min.js') #}"></script>
+
+
+        <script src="{{ asset('biblioteca/biblioteca/js/sitie.js') }}"></script>
+
+        <link rel='stylesheet' href='{{ asset('bundles/fullcalendar-3.1.0/fullcalendar.css') }}' />
+
+        <script src="{{ asset('biblioteca/fullcalendar-3.1.0/lib/moment.min.js') }}"></script>
+        <script src="{{ asset('biblioteca/fullcalendar-3.1.0/fullcalendar.js') }}"></script>
+        <script src="{{ asset('biblioteca/fullcalendar-3.1.0/locale-all.js') }}"></script>
         {% block stylesheets %}{% endblock %}
 
     </head>
     <body>
         {% block body %}{% endblock %}
-        <script src="{{ asset('build/js/app.js') }}"></script>
 
         {% block javascripts %}        {% endblock %}
     </body>

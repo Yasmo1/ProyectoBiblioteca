@@ -1,44 +1,127 @@
-<nav class="navbar navbar-expand-lg navbar-light Estilo_Menu">
-    <div class="container">
-        <div class="row">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Biblioteca</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Formaci&oacute;n</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Publicaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Investigaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Noticias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://biblioteca.upr.edu.cu">Blog</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Biblioteca</a>
-                    </li>
 
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse navbar-fixed-top Estilo_Menu" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">Inicio</a>
+                </li>
+
+                <li>
+                    <a href="#">Biblioteca</a>
+                </li>
+                <li>
+                    <a href="#">Formaci&oacute;n</a>
+                </li>
+                <li>
+                    <a href="#">Publicaciones</a>
+                </li>
+                <li class="hidden-sm">
+                    <a href="#">Investigaciones</a>
+                </li>
+
+                <li class="hidden-sm">
+                    <a href="#">Noticias</a>
+                </li>
+                <li class="hidden-sm">
+                    <a target="_blank" href="https://biblioteca.upr.edu.cu">Blog</a>
+                </li>
+
+                <li class="dropdown hidden-xs hidden-lg hidden-md">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="visible-sm">
+                            <a href="#">Investigaciones</a>
+                        </li>
+                        <li class="visible-sm">
+                            <a href="#">Noticias</a>
+                        </li>
+                        <li class="visible-sm">
+                            <a target="_blank" href="https://biblioteca.upr.edu.cu">Blog</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="dropdown">
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <!--<img title="{{ 'layout.logged_in_as'|trans({'%username%': app.user}, 'FOSUserBundle') }}"
+                                     class="img-rounded" src="http://avatar.upr.edu.cu/{{ app.user.username }}.jpeg"
+                                     width="25" height="25"/>
+                                     -->
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                            <!--<span class="caret"></span>-->
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_EDITOR") %}
+                                <li>
+                                    <a href="{{ path('noticia') }}">
+                                        <span class="glyphicon glyphicon-wrench"></span>
+                                        Administrar
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted("ROLE_DICT") or  is_granted("ROLE_DICT_ADMIN") %}
+                                <li>
+                                    <a href="{{ path('ptindividual') }}">
+                                        <span class="glyphicon glyphicon-open"></span>
+                                        CRAI
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted("ROLE_DICT") or  is_granted("ROLE_DICT_ADMIN") %}
+                                <!-- <li>
+                                        <a href="{{ path('escritorio') }}">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            Mi Escritorio
+                                        </a>
+                                    </li>-->
+                            {% endif %}
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    Buscar
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="" href="#">
+                            <div><span class="glyphicon glyphicon-user"></span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <div><span class="glyphicon glyphicon-search"></span></div>
+                        </a>
+                    </li>
+                {% endif %}
+
+
+            </ul>
         </div>
     </div>
 </nav>
