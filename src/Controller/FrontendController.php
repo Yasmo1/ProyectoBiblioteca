@@ -285,4 +285,52 @@ class FrontendController extends Controller
         $today = in_array($today, $first) ? 'first' : $today;
         return $today;
     }
+
+    /**
+     * @Route("/servicios_sr", name="servicios_sr")
+     */
+    public function sitiosReferenciaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sitiosR = $em->getRepository('App:SitiosReferencia')->findAll();
+        return $this->render('frontend/sitios_referencias.html.twig',array(
+            'sitiosR'=>$sitiosR,
+        ));
+
+    }
+
+    /**
+     * @Route("/biblioteca_quienes_somos", name="biblioteca_quienes_somos")
+     */
+    public function qSomosAction()
+    {
+        return $this->render('frontend/q_somos.html.twig' );
+    }
+
+    /**
+     * @Route("/biblioteca_biblioteca", name="biblioteca_biblioteca")
+     */
+    public function bibliotecaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bibliotecas = $em->getRepository('App:Biblioteca')->findAll();
+        $salas = $em->getRepository('App:Salas')->findAll();
+        $servicios = $em->getRepository('App:ServiciosBiblioteca')->findAll();
+
+        $today = $this->getActiveDay();
+        $new_date= new \DateTime();
+        $hoy = getdate();
+
+        return $this->render('frontend/biblioteca.html.twig',array(
+            'dia'=>$hoy ['wday'],
+            'hora' => $hoy ['hours'],
+            'min' => $hoy ['minutes'],
+            'seg' => $hoy ['seconds'],
+            'mes' =>$hoy ['mon'],
+            'year' => $hoy ['year'],
+            'bibliotecas' => $bibliotecas,
+            'salas' => $salas,
+            'servicios' => $servicios
+        ));
+    }
 }

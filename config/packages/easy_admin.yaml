@@ -18,6 +18,7 @@ easy_admin:
                    - { label: 'Usuarios', entity: 'User' }
                    - { label: 'Sitios Web', entity: 'SitiosWebCRAI' }
                    - { label: 'Tecnologias', entity: 'Tecnologias' }
+                   - { label: 'Sitios de Referencia', entity: 'SitiosReferencia' }
                - label: 'Bibliotecas'
                  children:
                    - { label: 'Servicios', entity: 'ServiciosBiblioteca' }
@@ -61,6 +62,29 @@ easy_admin:
        time:     'H:i'
        datetime: 'd/m/Y H:i:s'
    entities:
+           SitiosReferencia:
+               class: App\Entity\SitiosReferencia
+               list:
+                  title: "Sitios de Referencia"
+                  fields:
+                      - id
+                      - { property: 'nombre', type: 'text' }
+                      - { property: 'url', type: 'url' }
+                      - { property: 'image', type: 'image', base_path: '/files/imagesSitiosReferencia' }
+                      - fecha
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nuev Sitio de Referencia"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'Nombre', label: 'nombre', type: 'text' }
+                      - { property: 'url', type: 'url' }
+                      - { property: 'imageFile', type: 'vich_image' }
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
+                      - descripcion
            Investigaciones:
                class: App\Entity\Investigaciones
                list:
@@ -276,6 +300,7 @@ easy_admin:
                   fields:
                       - id
                       - nombre
+                      - tipo
                       - bibliotecas
                   actions:
                       - { name: 'show', icon: 'search', label: ' ' }
@@ -286,6 +311,7 @@ easy_admin:
                   fields:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - { property: 'nombre', label: 'Nombre', type: 'text' }
+                      - { property: 'tipo', label: 'Tipo de Servicio', type: 'choice', type_options: { multiple: false, choices: {' ': ' ', 'Préstamo de documentos': 'Préstamo de documentos', 'Servicios en línea': 'Servicios en línea', 'Servicios de acceso al documento': 'Servicios de acceso al documento' } } }
                       - bibliotecas
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - descripcion

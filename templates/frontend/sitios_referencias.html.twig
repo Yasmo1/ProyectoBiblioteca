@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <div class="page-header">
+                        <h3 class="Estilo_Enunciado_Noticias">Sitios de Referencia</h3>
+                    </div>
+                    <br>
+
+                    <ul class="list-unstyled">
+                        {% for sitio in sitiosR %}
+                            <li><a target="_blank" href="{{ sitio.url }}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">{{ sitio.nombre }}</div></a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
