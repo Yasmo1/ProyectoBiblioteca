@@ -1,0 +1,11 @@
+{% if recurso.categoria != "Revistas"%}
+    <a target="_blank" href="{{recurso.url}}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold"> {{recurso.nombre}}</div></a>
+    <div>
+        <div class="Estilo_Noticias">
+            {{recurso.descripcion|raw}}
+        </div>
+
+    </div>
+{% else %}
+    <a target="_blank" href="{{recurso.url}}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">{{recurso.nombre}}</div></a>
+{% endif %}

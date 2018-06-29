@@ -47,4 +47,44 @@ class NoticiasRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getPublicNewsViejos()
+    {
+        $query = $this->createQueryBuilder('n')
+            ->where('n.publica = :publica')
+            ->setParameter('publica', 1)
+            ->getQuery();
+        return $query->getResult();
+    }
+
+    public function getPublicNews()
+    {
+        $query = $this->createQueryBuilder('n')
+            ->where('n.publica = :publica')
+            ->setParameter('publica', 1)
+            ->orderBy('n.id', 'DESC')
+            ->getQuery();
+        return $query->getResult();
+    }
+    public function getPortadaNews()
+    {
+        $query = $this->createQueryBuilder('n')
+            ->where('n.publica = :publica')
+            ->andWhere('n.portada = :portada')
+            ->setParameter('publica', 1)
+            ->setParameter('portada', 1)
+            ->orderBy('n.id', 'DESC')
+            ->getQuery();
+        return $query->getResult();
+    }
+    public function getLastUpdate()
+    {
+        $query = $this->createQueryBuilder('n')
+            ->where('n.publica = :publica')
+            ->setParameter('publica', 1)
+            ->orderBy('n.fecha','DESC')
+            ->getQuery();
+        $result= $query->getArrayResult();
+        return $result[0]['fecha'];
+    }
 }

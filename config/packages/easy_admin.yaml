@@ -606,6 +606,7 @@ easy_admin:
                       - { property: 'imageFile', type: 'vich_image' }
                       - { type: 'group', css_class: 'col-sm-12', label: 'Cuerpo' }
                       - cuerpo
+
            Comentarios:
                class: App\Entity\Comentarios
                list:

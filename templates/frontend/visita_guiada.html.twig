@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+{% block mensajes %}
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <div class="row Mi_Margen_Left">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="Mis_Mensajes" class="row-fluid">
+
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                            {% for flashMessage in flashMessages %}
+                                <div id="flash-messages">
+                                    <br>
+                                    <div  class="alert alert-{{ type }}">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage|trans }}
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                    /* <![CDATA[ */
+                                    setTimeout('$("#flash-messages").hide("normal")', 5000);
+                                    /* ]]> */
+                                </script>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <div class="page-header">
+                        <h3 class="Estilo_Enunciado_Noticias">Visita Guiada</h3>
+                    </div>
+                    <br>
+
+                    <p class="Estilo_Noticias">
+                        El servicio de Visitas Guiadas tiene la intención de orientar a
+                        estudiantes de nuevo ingreso a la universidad acerca de los
+                        servicios y productos que se brindan en la biblioteca,
+                        a partir del recorrido por sus instalaciones guiado por
+                        especialistas de la misma.
+
+
+                    </p>
+                    <p class="Estilo_Noticias">
+                        Para solicitar una visita guiada complete el siguiente formulario.
+                    </p>
+                    <br><br><br>
+
+                    <div class="Mi_jumbotron">
+                        <form id="form-vguiada" role="form" class="form-horizontal form-contacto "
+                              action="{{ path('servicios_vg_send') }}" method="post">
+                            {{ form_errors(form) }}
+                            <div class="form-group">
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Nombre y Apellidos</div>
+                                    {{ form_widget(form.nombre) }}
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Correo</div>
+                                    {{ form_widget(form.correo) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Facultad</div>
+                                    {{ form_widget(form.facultad) }}
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Carrera</div>
+                                    {{ form_widget(form.carrera) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">A&ntilde;o</div>
+                                    {{ form_widget(form.anno) }}
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Cantidad de Estudiantes</div>
+                                    {{ form_widget(form.cantidadestudiantes) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="hidden">
+                                    <div for="flash-messages" class="Estilo_Noticias">Fecha</div>
+                                    {{ form_widget(form.fecha) }}
+                                </div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Fecha</div>
+                                    <input type="datetime-local" name="fecha">
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+
+                                {{ form_widget(form._token) }}
+                                <div class="col-lg-5 col-md-5">
+                                    <br><br>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn Estilo_btn_Form pull-right"><i
+                                                    class="icon-ok"></i> {{ 'Enviar' | trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

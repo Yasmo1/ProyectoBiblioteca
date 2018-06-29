@@ -31,8 +31,12 @@
 
     </head>
     <body>
+        {% include "frontend/barra_menu.html.twig" %}
+        {% block mensajes %}
+        {% endblock %}
         {% block body %}{% endblock %}
 
+        {% include "frontend/Pie_Pagina.html.twig" %}
         {% block javascripts %}        {% endblock %}
     </body>
 </html>

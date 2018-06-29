@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Inicio</a>
+                    <a href="{{ path('inicio') }}">Inicio</a>
                 </li>
 
                 <li>
@@ -71,7 +71,7 @@
                         <ul class="dropdown-menu">
                             {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_EDITOR") %}
                                 <li>
-                                    <a href="{{ path('noticia') }}">
+                                    <a href="#">
                                         <span class="glyphicon glyphicon-wrench"></span>
                                         Administrar
                                     </a>
@@ -79,7 +79,7 @@
                             {% endif %}
                             {% if is_granted("ROLE_DICT") or  is_granted("ROLE_DICT_ADMIN") %}
                                 <li>
-                                    <a href="{{ path('ptindividual') }}">
+                                    <a href="#">
                                         <span class="glyphicon glyphicon-open"></span>
                                         CRAI
                                     </a>

@@ -37,7 +37,7 @@ class Vguiada
     private $carrera;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",  nullable=true)
      */
     private $fecha;
 
@@ -46,9 +46,14 @@ class Vguiada
      */
     private $cantidadestudiantes;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $anno;
+
     public function __tostring()
     {
-        return $this->nombre;
+         return (string)$this->nombre;
     }
 
     public function getId()
@@ -104,12 +109,12 @@ class Vguiada
         return $this;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha()
     {
         return $this->fecha;
     }
 
-    public function setFecha(\DateTimeInterface $fecha): self
+    public function setFecha($fecha)
     {
         $this->fecha = $fecha;
 
@@ -124,6 +129,18 @@ class Vguiada
     public function setCantidadestudiantes(int $cantidadestudiantes): self
     {
         $this->cantidadestudiantes = $cantidadestudiantes;
+
+        return $this;
+    }
+
+    public function getAnno(): ?string
+    {
+        return $this->anno;
+    }
+
+    public function setAnno(?string $anno): self
+    {
+        $this->anno = $anno;
 
         return $this;
     }

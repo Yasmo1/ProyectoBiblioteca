@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7">
+
+            <div class="Mi_Biblioteca_container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page-header">
+                            <h3 class="Estilo_Enunciado_Noticias">Resursos de Informaci&oacute;n</h3>
+                        </div>
+                        <br>
+                        <ul class="list-unstyled">
+                            {% for categoria in categorias %}
+                                {% if categoria.recursosInformacions|length != 0 %}
+                                    <li>
+                                        <div id="{{ categoria }}">
+                                            <br><br><br>
+                                            <h2 class="Estilo_Enunciado_Noticias"> {{ categoria }} </h2>
+                                            <ul class="list-unstyled">
+                                                {% set recursos = categoria.recursosInformacions %}
+                                                {% if categoria.nombre =="Revistas" %}
+                                                    {% for recurso in revistas %}
+                                                        <li>
+                                                            {% include 'frontend/recurso_informacion.html.twig' with {'recurso':recurso} %}
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for recurso in recursos %}
+                                                        <li>
+                                                            {% include 'frontend/recurso_informacion.html.twig' with {'recurso':recurso} %}
+                                                        </li>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="Mi_jumbotron">
+                <div class="container">
+                    <div class="Mi_page-header_biblioteca">
+                        <h2 class="Estilo_Enunciado_Servicios_Principales">Servicios Principales</h2>
+                    </div>
+                    <ul class="list-unstyled">
+                        {% for categoria in categorias %}
+                            <li>
+                                <a href="#{{ categoria }}">
+                                    <div class="Estilo_Servicios_Principales">{{ categoria|lower|title }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
