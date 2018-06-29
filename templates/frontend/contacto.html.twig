@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+{% block mensajes %}
+    <div class="container Mi_pading">
+        <br>
+        <div class="Mi_container">
+            <div class="row Mi_Margen_Left">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="Mis_Mensajes" class="row-fluid">
+
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                            {% for flashMessage in flashMessages %}
+                                <div id="flash-messages" class="alert alert-{{ type }}">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ flashMessage|trans }}
+                                </div>
+                                <script type="text/javascript">
+                                    /* <![CDATA[ */
+                                    setTimeout('$("#flash-messages").hide("normal")', 5000);
+                                    /* ]]> */
+                                </script>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block body %}
+
+
+
+    <div class="container">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="Estilo_Enunciado_Noticias">Introduzca sus datos por favor.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="Mi_jumbotron1">
+        <div class="container">
+            <div class="Mi_container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <form class="form-horizontal form-contacto" role="form" action="{{ path('biblioteca_contacto_create') }}"
+                              method="post">
+                            {{ form_errors(form) }}
+                            <div class="form-group">
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Nombre y Apellidos</div>
+                                    {{ form_widget(form.nombre) }}
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Pa&iacute;s</div>
+                                    {{ form_widget(form.pais) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">E-mail</div>
+                                    {{ form_widget(form.correo) }}
+                                </div>
+                                <div class="col-lg-2 col-md-2"></div>
+                                <div class="col-lg-5 col-md-5">
+                                    <div for="flash-messages" class="Estilo_Noticias">Trabajo</div>
+                                    {{ form_widget(form.trabajo) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 col-md-12">
+                                    <div for="flash-messages" class="Estilo_Noticias">Usted ser&aacute; atendido lo antes posible</div>
+                                    {{ form_widget(form.contenido) }}
+                                    {{ form_widget(form._token) }}
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn Estilo_btn_Form pull-right"><i
+                                            class="icon-ok"></i> {{ 'Enviar' | trans }}</button>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

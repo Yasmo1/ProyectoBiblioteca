@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Vguiada;
+use App\Form\ContactoType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\VGuiadaType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Contacto;
 
 class FrontendController extends Controller
 {
@@ -109,5 +111,64 @@ class FrontendController extends Controller
             $this->get('session')->getFlashBag()->add('danger', 'Sus datos no se pudieron enviar, por favor contacte con el administrador.');
         }
         return $this->redirectToRoute('servicios_vg');
+    }
+
+    /**
+     * @Route("/biblioteca_contacto", name="biblioteca_contacto")
+     */
+    public function contactoAction()
+    {
+        $entity = new Contacto();
+        $form   = $this->createForm(ContactoType::class, $entity);
+
+        return $this->render('frontend/contacto.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/biblioteca_contacto_create", name="biblioteca_contacto_create")
+     */
+    public function contactoSendAction(Request $request)
+    {
+        $entity  = new Contacto();
+        $form = $this->createForm(ContactoType::class, $entity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Sus datos fueron enviados satisfacoriamente.');
+           /* // Aqui enviar la informacion al correo
+            $message = \Swift_Message::newInstance();
+            $em = $this->getDoctrine()->getManager();
+            $senders = $em->getRepository('BibliotecaBundle:Backends')-> getEmailsFromAdmins();
+            $message->setFrom(array(
+                "biblioteca@upr.edu.cu"=>"Sitio ICT"
+            ))
+                ->setSubject("Contacto")
+                ->setTo($senders)
+                ->setBody(
+                    $this->renderView( 'BibliotecaBundle:Default:mail.html.twig', array(
+                        'nombre'       => $entity->getNombre(),
+                        'pais'         => $entity->getPais(),
+                        'correo'  => $entity->getEmail(),
+                        'lugar_trabajo'    => $entity->getTrabajo(),
+                        'comentario'    => $entity->getContenido(),
+                    ) )
+                )
+                ->setContentType( 'text/html' );
+            $this->get( 'mailer' )->send( $message );*/
+
+
+            return $this->redirectToRoute(('biblioteca_contacto'));
+        }
+
+        return $this->render('frontend/contacto.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
     }
 }
