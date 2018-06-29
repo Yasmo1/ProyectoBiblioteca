@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Contacto;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +21,7 @@ class ContactoType extends AbstractType
                         'class' => "form-control")
                 )
             )
-            ->add('pais', TextType::class, array(
+            ->add('pais', CountryType::class, array(
                     'attr' => array(
                         'class' => "form-control")
                 )

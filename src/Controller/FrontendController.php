@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Quienreserva;
 use App\Entity\Vguiada;
 use App\Form\ContactoType;
+use App\Form\QuienreservaType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\VGuiadaType;
@@ -170,5 +172,95 @@ class FrontendController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/reservars_sala", name="reservars_sala")
+     */
+    public function reservar_SalaAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reservas = $em->getRepository('App:Quienreserva')->findAll();
+        $entity = new Quienreserva();
+        $entity->setHorainicio(new \DateTime());
+        $entity->setHorafin(new \DateTime());
+        $form   = $this->createForm(QuienreservaType::class, $entity);
+        return $this->render('frontend/reservar_sala.html.twig', array(
+            'form'   => $form->createView(),
+            'reservas' => $reservas
+        ));
+    }
+
+    /**
+     * @Route("/reservars_sala_hecha", name="reservars_sala_hecha")
+     */
+    public function reservar_SalaSendAction(Request $request)
+    {
+        $entity = new Quienreserva();
+        $form = $this->createForm(QuienreservaType::class, $entity);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $reservas = $em->getRepository('App:Quienreserva');
+
+        if ($form->isSubmitted() &&  $form->isValid()) {
+            $correo = $form->getData();
+            $Arreglo = mbsplit("@", $correo->getCorreo());
+            $fstrat = $correo->getHorainicio();
+            $fend = $correo->getHorafin();
+            $factual = new \DateTime("now");
+            $sala = $correo->getSala();
+
+            if($Arreglo[1] == "estudiantes.upr.edu.cu")
+            {
+                $this->get('session')->getFlashBag()->add('danger','Sus datos no se pudieron enviar, ...@estudiantes... no puede solicitar una Reserva.');
+                return $this->redirectToRoute('reservars_sala');
+            }else
+                if($fstrat > $fend || $fstrat < $factual)
+                {
+                    $this->get('session')->getFlashBag()->add('danger','Sus datos no se pudieron enviar, ...verifique los horarios... no puede solicitar una Reserva.');
+                    return $this->redirectToRoute('reservars_sala');
+                }else
+                    if(($reservas->getReservas_Ocupada($fstrat,$fend,$sala)))
+                    {
+                        $this->get('session')->getFlashBag()->add('danger','Sus datos no se pudieron enviar, ...La sala que intenta reservar se encuentra ocupada, por favor cambie el horario de su reserva... no puede solicitar una Reserva.');
+                        return $this->redirectToRoute('reservars_sala');
+                    }else
+                    {
+                        $entity->setPublica(False);
+                        $entity->setQuienautoriza($entity->getSala()->getResponsable());
+                        $em->persist($entity);
+                        $em->flush();
+                        $this->get('session')->getFlashBag()->add('success', 'Sus datos fueron enviados satisfacoriamente.');
+                        /*// Aqui enviar la informacion al correo
+                        $message = \Swift_Message::newInstance();
+                        $em = $this->getDoctrine()->getManager();
+                        $senders = $em->getRepository('BibliotecaBundle:Backends')->getEmailsFromVG();
+                        $message->setFrom(array(
+                            "biblioteca@upr.edu.cu" => "Sitio ICT"
+                        ))
+                            ->setSubject("Reserva de Sala")
+                            ->setTo($entity->getCorreo())
+                            ->addCc("yanet.blancop@upr.edu.cu")
+                            ->addCc("ycollazo@upr.edu.cu")
+                            ->addCc("isabel@upr.edu.cu")
+                            ->addCc("arianna@upr.edu.cu")
+                            ->setBody(
+                                $this->renderView('BibliotecaBundle:Default:reservasala_mail.html.twig', array(
+                                    'datos' => $entity,
+                                    'Aprobado' => false
+                                ))
+                            )
+                            ->setContentType('text/html');
+                        $this->get('mailer')->send($message);*/
+                    }
+
+
+
+        } else {
+            $this->get('session')->getFlashBag()->add('danger', 'Sus datos no se pudieron enviar, por favor contacte con el administrador.');
+        }
+        return $this->redirectToRoute('reservars_sala');
+
+
     }
 }

@@ -66,6 +66,11 @@ class Quienreserva
      */
     private $sala;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titulo;
+
     public function __tostring()
     {
         return $this->nombre;
@@ -192,6 +197,18 @@ class Quienreserva
     public function setSala(?Salas $sala): self
     {
         $this->sala = $sala;
+
+        return $this;
+    }
+
+    public function getTitulo(): ?string
+    {
+        return $this->titulo;
+    }
+
+    public function setTitulo(string $titulo): self
+    {
+        $this->titulo = $titulo;
 
         return $this;
     }

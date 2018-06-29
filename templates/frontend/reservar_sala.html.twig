@@ -1,0 +1,279 @@
+{% extends 'base.html.twig' %}
+{% block mensajes %}
+    <div class="container Mi_pading" xmlns="http://www.w3.org/1999/html">
+        <div class="Mi_container">
+            <div class="row Mi_Margen_Left">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="Mis_Mensajes" class="row-fluid">
+
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                            {% for flashMessage in flashMessages %}
+                                <div id="flash-messages">
+                                    <br>
+                                    <div  class="alert alert-{{ type }}">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage|trans }}
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                    /* <![CDATA[ */
+                                    setTimeout('$("#flash-messages").hide("normal")', 5000);
+                                    /* ]]> */
+                                </script>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="page-header">
+                    <h3 class="Estilo_Enunciado_Noticias">Reservar Sala</h3>
+                </div>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div id="calendar_Sala_Universal"></div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img class="center-block img-responsive img-rounded"
+                                 src="{{ asset('biblioteca/biblioteca/images/ICRAI/aprobado.jpg') }}"
+                                 alt="identidad"/>
+                        </div>
+                        <div class="col-lg-10">
+                            <h4 class="Estilo_Noticias">Reservas que han sido aprobadas</h4>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img class="center-block img-responsive img-rounded"
+                                 src="{{ asset('biblioteca/biblioteca/images/ICRAI/noaprobado.jpg') }}"
+                                 alt="identidad"/>
+                        </div>
+                        <div class="col-lg-10">
+                            <h4 class="Estilo_Noticias">Reservas que no han sido aprobadas</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="panel Mi_panel-default">
+                        <div class="panel-heading"><h4>Reservar</h4></div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" action="{{ path('reservars_sala_hecha') }}"
+                                  method="post">
+                                {{ form_errors(form) }}
+                                <div class="form-group">
+                                    <div class="col-lg-12 col-md-12">
+                                        <label for="flash-messages" class="Estilo_Noticias">Titulo*</label>
+                                        {{ form_widget(form.titulo) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="flash-messages" class="Estilo_Noticias">Quien Reserva?*</label>
+                                        {{ form_widget(form.nombre) }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="flash-messages" class="Estilo_Noticias">Departamento*</label>
+                                        {{ form_widget(form.departamento) }}
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12 col-md-12">
+                                        <label for="flash-messages" class="Estilo_Noticias">Correo*</label>
+                                        {{ form_widget(form.correo) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12 col-md-12">
+                                        <label for="flash-messages" class="Estilo_Noticias"> Fecha y Hora de Inicio*</label>
+                                        {{ form_widget(form.horainicio) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-lg-12 col-md-12">
+                                        <label for="flash-messages" class="Estilo_Noticias">Fecha y  Hora de Fin*</label>
+                                        {{ form_widget(form.horafin) }}
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="flash-messages" class="Estilo_Noticias">Participantes*</label>
+                                        {{ form_widget(form.cantidadparticipantes) }}
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="flash-messages" class="Estilo_Noticias">Sala*</label>
+                                        <div class="form-control">
+                                            {{ form_widget(form.sala) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="flash-messages" class="Estilo_Noticias">Objetivo de la Actividad*</label>
+                                        {{ form_widget(form.Objetivo) }}
+                                    </div>
+
+                                </div>
+                                {{ form_widget(form._token) }}
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn Estilo_btn_Form pull-right"><i
+                                                class="icon-ok"></i> {{ 'Reservar' | trans }}</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal_detalles_Reserva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &#215;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><strong class="Estilo_Noticias">Reserva:  <span id="tituloreserva" ></span></strong> </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <h4 class="list-group-item-heading">Inicia:</h4>
+                                    <p class="list-group-item-text"> <span id="startTime" class="Estilo_Noticias"></span><br></p>
+                                    <h4 class="list-group-item-heading">Finaliza:</h4>
+                                    <p class="list-group-item-text"> <span id="endTime" class="Estilo_Noticias"></span><br></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <strong class="Estilo_Noticias">Objetivo:</strong><br>
+                            <span id="descripionreserva" class="Estilo_Noticias"></span><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <strong class="Estilo_Noticias">Reservo:</strong><br>
+                            <span id="quienreserva" class="Estilo_Noticias"></span><br>
+                            <strong class="Estilo_Noticias">Del Departamento:</strong><br>
+                            <span id="departamentorepresenta" class="Estilo_Noticias"></span><br>
+                            <strong class="Estilo_Noticias">Correo:</strong><br>
+                            <span id="correo" class="Estilo_Noticias"></span><br>
+
+
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <strong class="Estilo_Noticias">Participantes:</strong><br>
+                            <span id="cantidadparticipantes" class="Estilo_Noticias"></span><br>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <strong class="Estilo_Noticias">Sala:</strong><br>
+                            <span id="sala" class="Estilo_Noticias"></span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#calendar_Sala_Universal').fullCalendar({
+                locale: 'es',
+                header: {
+                    left: 'prev,next today myCustomButton',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+
+                eventClick: function(calEvent, jsEvent, view) {
+
+                    document.getElementById('id_reserva').value = calEvent.id;
+                    //alert('Actividad: ' + calEvent.title);
+                    $("#startTime").html(moment(calEvent.start).format('MMM Do h:mm A'));
+                    $("#endTime").html(moment(calEvent.end).format('MMM Do h:mm A'));
+                    $("#tituloreserva").html((calEvent.title));
+
+                    var datos = (calEvent.description).split("^");
+
+                    $("#quienreserva").html((datos[0]));
+                    $("#departamentorepresenta").html((datos[1]));
+                    $("#correo").html((datos[2]));
+                    $("#cantidadparticipantes").html((datos[3]));
+                    $("#sala").html((datos[4]));
+                    $("#descripionreserva").html((datos[5]));
+
+                    $('#myModal_detalles_Reserva').modal({
+                        keyboard: true,
+                        show: true
+                    })
+                    // change the border color just for fun
+                    //$(this).css('border-color', 'red');
+
+                },
+                dayClick: function(date, jsEvent, view) {
+
+
+                    $('#myModal').modal({
+                        keyboard: true,
+                        show: true
+                    })
+                    // change the day's background color just for fun
+                    //$(this).css('background-color', 'red');
+
+                },
+                events: [
+                    {% for reserva in reservas %}
+                    {
+                        id     : '{{ reserva.id }}',
+                        title  : '{{ reserva.titulo }}',
+                        start  : '{{ reserva.horainicio |date("Y-m-d H:i:s") }}',
+                        end    : '{{ reserva.horafin |date("Y-m-d H:i:s")}}',
+                        description: '{{ reserva.nombre }}'+'^'+'{{ reserva.departamento }}'+'^'+'{{ reserva.correo }}'
+                        +'^'+'{{ reserva.cantidadparticipantes }}'+'^'+'{{ reserva.sala }}'+'^'+'{{ reserva.Objetivo }}',
+                        {% if  reserva.publica %}
+                        color  :  '#00A3FE',
+                        textColor: 'black',
+                        {% else %}
+                        color  :  '#aeaeae',
+                        textColor: 'black'
+                        {% endif %}
+
+
+                    },
+                    {% endfor %}
+
+
+                ]
+            });
+
+
+        });
+    </script>
+{% endblock %}
