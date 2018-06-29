@@ -22,11 +22,11 @@ class SalasRepository extends ServiceEntityRepository
 //    /**
 //     * @return Salas[] Returns an array of Salas objects
 //     */
-    /*
-    public function findByExampleField($value)
+
+    public function findByNombre($value)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+            ->andWhere('s.Nombre = :val')
             ->setParameter('val', $value)
             ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
@@ -34,7 +34,7 @@ class SalasRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Salas

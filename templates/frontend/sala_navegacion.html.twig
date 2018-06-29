@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <div class="page-header">
+                        <h3 class="Estilo_Enunciado_Noticias">{{ Sala.Nombre }}</h3>
+                    </div>
+                    <br>
+
+                    <p class="Estilo_Noticias">
+                        {{ Sala.descripcion }}
+                    </p>
+
+                    <p class="Estilo_Noticias">
+                        Cuenta  con un total de {{ Sala.capacidad }} PCs disponibles cada una con 2 puestos de trabajo.
+
+                    </p>
+                    <p class="Estilo_Noticias">
+                        La Sala de Navegación se brinda sus servicios en los horarios siguentes:
+                    </p>
+                    <br><br><br>
+                    <canvas class="center-block" id="lienzo" width="100" height="100">
+                        <p>Tu navegador no soporta canvas: Aquí deberías de ver una imagen: </p>
+                    </canvas>
+
+
+                    <br>
+                    <img id="VIERNES" class="center-block img-responsive" width="700" src="{{ asset('biblioteca/biblioteca/images/ICRAI/HorarioViernes.png') }}"
+                         alt="identidad"/>
+                    <img id="CERRADO" class="center-block img-responsive " width="700" src="{{ asset('biblioteca/biblioteca/images/ICRAI/HorarioCerrado.png') }}"
+                         alt="identidad"/>
+                    <img id="LMMJ" class="center-block img-responsive " width="700" src="{{ asset('biblioteca/biblioteca/images/ICRAI/HorarioLMMJ.png') }}"
+                         alt="identidad"/>
+                    <img id="SABADO" class="center-block img-responsive " width="700" src="{{ asset('biblioteca/biblioteca/images/ICRAI/HorarioSabado.png') }}"
+                         alt="identidad"/>
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#VIERNES").hide();
+            $("#CERRADO").hide();
+            $("#LMMJ").hide();
+            $("#SABADO").hide();
+        });
+        Math.degToRad = function(deg) // Agregamos método a la clase estática
+        {
+            return deg*Math.PI/180;
+        }
+        window.onload=function()
+        {
+            ele=document.getElementById('lienzo');
+            ctx=ele.getContext("2d");
+            xmax=ele.offsetWidth; // ancho de lienzo
+            ymax=ele.offsetHeight; // alto de lienzo
+            xo=xmax/2; // Centro reloj coordenada x
+            yo=ymax/2; // Centro reloj coordenada y
+            radiox=xo-(xo/10); // Tamaño del radio ancho de la circunferencia
+            radioy=yo-(yo/10); // Tamaño del radio alto de la circunferencia
+            relojCarcasa();
+            relojIniciar();
+        }
+
+        function relojCarcasa() // Circulo con puntos
+        {
+            ctx.fillStyle = 'rgba(223,223,223, 0)';
+            ctx.beginPath();
+            for (ang=0; ang<360; ang=ang+1)
+            {
+                radianes=Math.degToRad(ang);
+                x=radiox*Math.sin(radianes);
+                y=radioy*Math.cos(radianes);
+                x=x+xo;
+                y=y+yo;
+                ctx.fillRect(x,y,4,4);
+                ctx.lineCap = "round";
+            }
+            //ctx.arc(100, 50, 20, 0, Math.PI, false);
+            ctx.stroke();
+        }
+
+        function relojManecillaHora(pos)
+        {
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = 'rgba(0,0,255, 1)';
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            radianes=Math.degToRad(180-pos*30); // hora
+            x=radiox/1.5*Math.sin(radianes);
+            y=radioy/1.5*Math.cos(radianes);
+            x=x+xo;
+            y=y+yo;
+            ctx.moveTo(xo,yo);
+            ctx.lineTo(x,y);
+            ctx.stroke();
+        }
+
+        function relojManecillaMinuto(pos)
+        {
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = 'rgba(0,0,255, 1)';
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            radianes=Math.degToRad(180-pos*6); // minuto
+            x=radiox/1.25*Math.sin(radianes);
+            y=radioy/1.25*Math.cos(radianes);
+            x=x+xo;
+            y=y+yo;
+            ctx.moveTo(xo,yo);
+            ctx.lineTo(x,y);
+            ctx.stroke();
+        }
+
+        function relojManecillaSegundo(pos)
+        {
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(221,64,4, 0)';
+            ctx.beginPath();
+            radianes=Math.degToRad(180-pos*6); // segundo
+            x=radiox*Math.sin(radianes);
+            y=radioy*Math.cos(radianes);
+            x=x+xo;
+            y=y+yo;
+            ctx.moveTo(xo,yo);
+            ctx.lineTo(x,y);
+            ctx.stroke();
+        }
+
+        function relojAvanza()
+        {
+            var f=new Date();
+            DefinirImafen(f);
+            ctx.clearRect(0,0,xmax,ymax);//borra canvas, hacerla transparente o sin contenido gráfico
+            //relojCarcasa();
+            relojManecillaSegundo(f.getSeconds());
+            relojManecillaMinuto(f.getMinutes());
+            relojManecillaHora(f.getHours());
+        }
+
+        function DefinirImafen(f)
+        {
+            dia = f.getDay();
+            hora = f.getUTCHours();
+            Min = f.getMinutes();
+            //alert("Dia"+dia+"Hora"+hora+"Min"+Min);
+            if(dia == 6 && hora >= 8 && hora < 12)
+            {
+                $("#VIERNES").hide();
+                $("#CERRADO").hide();
+                $("#LMMJ").hide();
+                $("#SABADO").show();
+            }else
+            if(dia == 5 && hora >= 8 && hora < 17)
+            {
+                $("#VIERNES").show();
+                $("#CERRADO").hide();
+                $("#LMMJ").hide();
+                $("#SABADO").hide();
+            }else
+            if(dia > 0 && dia < 5 && hora >= 8 && hora < 22)
+            {
+                $("#VIERNES").hide();
+                $("#CERRADO").hide();
+                $("#LMMJ").show();
+                $("#SABADO").hide();
+            }else
+            {
+                $("#VIERNES").hide();
+                $("#CERRADO").show();
+                $("#LMMJ").hide();
+                $("#SABADO").hide();
+            }
+        }
+
+        function relojIniciar()
+        {
+            window.setInterval('relojAvanza()', 1000);
+        }
+    </script>
+
+{% endblock %}

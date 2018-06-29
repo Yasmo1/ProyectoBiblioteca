@@ -263,4 +263,26 @@ class FrontendController extends Controller
 
 
     }
+
+    /**
+     * @Route("/servicios_sn", name="servicios_sn")
+     */
+    public function salaNavegacionAction()
+    {
+        $today = $this->getActiveDay();
+        $em = $this->getDoctrine()->getManager();
+        $reservas = $em->getRepository('App:Salas')->findByNombre("Sala de Navegación");
+        return $this->render('frontend/sala_navegacion.html.twig',array(
+            'today'=>$today,
+            'Sala' =>$reservas[0]
+        ));
+    }
+
+    private function getActiveDay()
+    {
+        $today = date('D');
+        $first = array('Mon', 'Tue', 'Wed', 'Thu');
+        $today = in_array($today, $first) ? 'first' : $today;
+        return $today;
+    }
 }
