@@ -83,11 +83,6 @@ class Usuarios
     private $categoriadocente;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $CategoriaCientifica;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Departamentos", inversedBy="trabajadores")
      */
     private $departamento;
@@ -151,6 +146,21 @@ class Usuarios
      * @ORM\ManyToMany(targetEntity="App\Entity\Tecnologias", mappedBy="especialistas")
      */
     private $tecnologias;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $EsMaster;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $EsDoctor;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $EsAdiestrado;
 
     public function __construct()
     {
@@ -317,17 +327,6 @@ class Usuarios
         return $this;
     }
 
-    public function getCategoriaCientifica(): ?string
-    {
-        return $this->CategoriaCientifica;
-    }
-
-    public function setCategoriaCientifica(?string $CategoriaCientifica): self
-    {
-        $this->CategoriaCientifica = $CategoriaCientifica;
-
-        return $this;
-    }
 
     public function getDepartamento(): ?Departamentos
     {
@@ -627,6 +626,42 @@ class Usuarios
             $this->tecnologias->removeElement($tecnologia);
             $tecnologia->removeEspecialista($this);
         }
+
+        return $this;
+    }
+
+    public function getEsMaster(): ?bool
+    {
+        return $this->EsMaster;
+    }
+
+    public function setEsMaster(?bool $EsMaster): self
+    {
+        $this->EsMaster = $EsMaster;
+
+        return $this;
+    }
+
+    public function getEsDoctor(): ?bool
+    {
+        return $this->EsDoctor;
+    }
+
+    public function setEsDoctor(?bool $EsDoctor): self
+    {
+        $this->EsDoctor = $EsDoctor;
+
+        return $this;
+    }
+
+    public function getEsAdiestrado(): ?bool
+    {
+        return $this->EsAdiestrado;
+    }
+
+    public function setEsAdiestrado(?bool $EsAdiestrado): self
+    {
+        $this->EsAdiestrado = $EsAdiestrado;
 
         return $this;
     }

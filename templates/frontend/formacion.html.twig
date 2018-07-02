@@ -1,0 +1,221 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <div class="page-header">
+                        <h3 class="Estilo_Enunciado_Noticias">Formación</h3>
+                    </div>
+                    <br>
+
+                    <p class="Estilo_Noticias">
+                        El Departamento disciplina, Ciencias de la Información del Centro de Recursos para el Aprendizaje y la Investigación (CRAI) se encuentra subordinado en la estructura de la Universidad, a la Vicerrectoría de Formación de Profesionales. Cuenta con un colectivo docente integrado por {{ docentes|length }} profesores; de estos se cuenta con {{ doctores|length }} doctor y {{ masters|length }} másteres y las categorías docentes son las siguientes: {{ ProfesorT|length }} profesor titular, {{ ProfesorAux|length }} auxiliares, {{ ProfesorA|length }} asistentes, {{ ProfesorI|length }} instructores y {{ Adiestrados|length }} adiestrados.
+                    </p>
+
+                    <h2 class="Estilo_Enunciado_Noticias">Pregrado</h2>
+
+                    <p class="Estilo_Noticias">
+                        En el cumplimiento de sus funciones docentes, desde 1995 la anteriormente Dirección de Información Científica Técnico (DICT) tuvo a su encargo la dirección de la carrera Bibliotecología y Ciencias de la Información en la provincia, se graduaron 238 licenciados para el territorio. A la par de este espacio, brindó y brinda en la actualidad el CRAI, servicios docentes a todas las carreras del curso regular diurno (CRD) y en algunos casos en curso por encuentro (CPE) a través de diferentes asignaturas en las sedes “Hnos. Saíz Montes de Oca” y “Mendive”
+                        Asimismo existe un grupo de profesores que no pertenecen a la disciplina del departamento y brindan servicios en las carreras en: Informática, Cultura física y Química
+
+                    </p>
+
+                    <br/>
+                    <dl>
+                        <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold"><span>Asignaturas de servicio</span></dd>
+                        {% for asig in AsignaturaServicioPregrado %}
+                            <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold" >{{ asig.nombre }}</dd>
+                        {% endfor %}
+                    </dl>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <caption><h4 class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Para el segundo semestre del 2016/17 se  presta servicio en las diferentes   carreras:</h4></caption>
+                            <thead>
+                            <tr>
+                                <th><p class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Carreras</p></th>
+                                <th><p class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Asignaturas</p></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for asigser in AsignaturaServicioPregrado %}
+                                {% for carrera in asigser.getCarreras() %}
+                                    <tr>
+                                        <td><p class="Estilo_Noticias">{{ carrera.nombre }}</p></td>
+                                        <td><p class="Estilo_Noticias">{{ asigser.nombre }}</p></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="Estilo_Noticias">
+                        La impartición de la asignatura competencias informacionales en la sede “Hnos. Saíz Montes de Oca” a partir curso 2012-13 como parte del currículum propio de las carreras del CRD, ha constituido una vía eficaz para contribuir al fortalecimiento de la cultura informacional de los estudiantes, meta expresada en la proyección estratégica de la Universidad. Durante el curso 2013-14; en un primer momento recibieron la misma los estudiantes de segundo y quinto año y ya pasados cuatro años la reciben indistintamente según las carreras en segundo o tercer año, excepto las que reciben las asignaturas de Gestión. El impacto de la misma, se ha visto reflejado en el mejoramiento de los resultados de los últimos diagnósticos de computación aplicado en la UPR.
+                    </p>
+                    <br/> <br/>
+
+
+
+                    <h2 class="Estilo_Enunciado_Noticias">Postgrado</h2>
+
+                    <p class="Estilo_Noticias">
+                        Actualmente el área cuenta con un claustro que atiende la modalidad de postgrado, participa en diferentes programas de maestría, doctorado y especialidad a través de la impartición de cursos relacionados con la formación de habilidades informacionales e infotecnológicas. Además, oferta diplomados, cursos y entrenamientos independientes para la Universidad y el territorio, dentro del plan de superación de la UPR y del área.
+                    </p>
+                    <caption><h4 class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Cursos programados para el 2017:</h4></caption>
+                    <div class="table-responsive">
+                        <table id="example" class="table" cellspacing="0" width="100%">
+                            <button id="MiBotton" class="btn btn-default btn-lg center-block">
+                                <span class="glyphicon glyphicon-calendar"></span>Calendario
+                            </button>
+                            <thead>
+                            <tr>
+                                <th><p class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Fecha</p></th>
+                                <th><p class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Actividad</p></th>
+                                <th><p class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Tipo de actividad</p></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for postg in Postgrado %}
+                                <tr>
+                                    <td><p class="Estilo_Noticias">{{ postg.fechainicio|date("d/m/Y") }} al {{ postg.fechafin|date("d/m/Y") }} </p></td>
+                                    <td>
+                                        <p class="Estilo_Noticias">{{ postg.nombre }}</p>
+                                        <div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Organismos/instituciones que lo solicitan:
+                                            {% for org in postg.getOrganismosPostgrados() %}
+                                                <div class="Estilo_Noticias">{{ org.nombre }}</div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </td>
+                                    <td><p class="Estilo_Noticias">{{ postg.tipoactividadpostgrado.nombre }}</p></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="Estilo_Noticias">
+                        Asimismo los docentes del área de mayor categoría, tanto docente como científica  prestan servicios en otros programas académicos de la UPR, y son los siguientes:
+                    </p>
+
+
+
+                    <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">Diplomado de Administración Empresas.</dd>
+                    <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">Curso Infotecnologías para Adiestrados</dd>
+                    <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">Maestría en Desarrollo Social</dd>
+                    <dd class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">Maestría en Geología. </dd>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">× </button>
+                    <h4 class="modal-title" id="myModalLabel"> Calendario </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#example').dataTable({
+                "sPaginationType": "full_numbers",
+                "order": [[ 2, "desc" ]],
+
+                "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "Todos"]],
+                "oLanguage" : {
+                    "sLengthMenu" : "Mostrando _MENU_ elementos por página",
+                    "sZeroRecords" : "No hay registros disponibles",
+                    "sInfo" : "Mostrando _START_ - _END_ de _TOTAL_ elementos encontrados",
+                    "sInfoEmpty" : "No hay elementos a mostrar",
+                    "sInfoFiltered" : "(filtrado de _MAX_ elementos en total)",
+                    "sProcessing" : "Procesando",
+                    "sSearch" : "Buscar:",
+                    oPaginate : {
+                        sFirst : "Primero",
+                        sPrevious : "Anterior",
+                        sNext : "Próximo",
+                        sLast : "Último"
+                    }
+                }
+            });
+
+            $('#calendar').fullCalendar({
+                locale: 'es',
+                header: {
+                    left: 'prev,next today myCustomButton',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+
+                    alert('Actividad: ' + calEvent.title);
+
+
+                    // change the border color just for fun
+                    //$(this).css('border-color', 'red');
+
+                },
+                dayClick: function(date, jsEvent, view) {
+
+
+                    $('#myModal').modal({
+                        keyboard: true,
+                        show: true
+                    })
+                    // change the day's background color just for fun
+                    //$(this).css('background-color', 'red');
+
+                },
+                events: [
+                    {% for postg in Postgrado %}
+                    {
+                        title  : '{{ postg.nombre }}',
+                        start  : '{{ postg.fechainicio|date("d/m/Y") }}',
+                        end    : '{{ postg.fechafin|date("d/m/Y") }}',
+                        color  : 'black',     // an option!
+                        textColor: 'yellow' // an option!
+                    },
+                    {% endfor %}
+                    {
+                        title  : 'Gestión de la información (desarrollo, archivos)',
+                        start  : '2017-09-01',
+                        end    : '2017-09-31',
+                        color  : 'black',     // an option!
+                        textColor: 'Violet' // an option!
+                    }
+
+                ]
+            });
+
+            $('#MiBotton').click(function(){
+                $("#myModal").modal();
+            });
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#calendar').fullCalendar('today');
+            })
+
+        });
+    </script>
+
+{% endblock %}

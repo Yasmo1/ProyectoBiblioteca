@@ -22,19 +22,67 @@ class UsuariosRepository extends ServiceEntityRepository
 //    /**
 //     * @return Usuarios[] Returns an array of Usuarios objects
 //     */
-    /*
-    public function findByExampleField($value)
+
+    public function findByEsDocente($value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.EsDocente = :val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    public function findByEsMaster($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.EsMaster = :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByEsDoctor($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.EsDoctor = :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findBycategoriadocente($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.categoriadocente = :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByEsAdiestrado($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.EsAdiestrado = :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Usuarios

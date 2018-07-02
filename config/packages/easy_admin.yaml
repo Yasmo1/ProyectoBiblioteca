@@ -516,13 +516,15 @@ easy_admin:
                      - { property: 'image', type: 'image', base_path: '/files/fotostrabajadores' }
                      - nombre
                      - correo
+                     - EsAdiestrado
                      - EsDocente
                      - telefono
                      - cargo
                      - funcion
                      - departamento
                      - categoriadocente
-                     - CategoriaCientifica
+                     - EsMaster
+                     - EsDoctor
                      - grupodetrabajo
                    actions:
                      - { name: 'show', icon: 'search', label: ' ' }
@@ -548,10 +550,13 @@ easy_admin:
                       - { property: 'cargo', label: 'Cargo', type: 'text' }
                       - { property: 'funcion', label: 'Funcion que realiza', type: 'text' }
                       - { property: 'categoriadocente', label: 'Categoria Docente', type: 'choice', type_options: { multiple: false, choices: { 'Profesor Instructor': 'Profesor Instructor', 'Profesor Asistente': 'Profesor Asistente', 'Profesor Auxiliar': 'Profesor Auxiliar', 'Profesor Titular': 'Profesor Titular' } } }
-                      - { property: 'CategoriaCientifica', label: 'Categoria Cientifica',  type: 'choice', type_options: { multiple: false, choices: { 'Dr. C.  (Doctor en ciencias pedagogicas)': 'Dr. C.  (Doctor en ciencias pedagogicas)', 'Dr. Cs. (Doctor en ciencias)': 'Dr. Cs. (Doctor en ciencias)', 'MSc. o M.Sc. (Especialidad o maestria:)': 'MSc. o M.Sc. (Especialidad o maestria:)'} } }
                       - departamento
                       - grupodetrabajo
+                      - EsAdiestrado
                       - EsDocente
+                      - EsMaster
+                      - EsDoctor
+
            User:
                class: App\Entity\User
                list:

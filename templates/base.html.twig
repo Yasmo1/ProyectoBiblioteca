@@ -27,6 +27,11 @@
         <script src="{{ asset('biblioteca/fullcalendar-3.1.0/lib/moment.min.js') }}"></script>
         <script src="{{ asset('biblioteca/fullcalendar-3.1.0/fullcalendar.js') }}"></script>
         <script src="{{ asset('biblioteca/fullcalendar-3.1.0/locale-all.js') }}"></script>
+
+        <link rel='stylesheet' href='{{ asset('biblioteca/DataTables-1.10.13/media/css/jquery.dataTables.min.css') }}' />
+        <link rel='stylesheet' href='{{ asset('biblioteca/DataTables-1.10.13/media/css/dataTables.bootstrap.min.css') }}' />
+        <script src="{{ asset('biblioteca/DataTables-1.10.13/media/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('biblioteca/DataTables-1.10.13/media/js/dataTables.bootstrap.min.js') }}"></script>
         {% block stylesheets %}{% endblock %}
 
     </head>
@@ -35,8 +40,8 @@
         {% block mensajes %}
         {% endblock %}
         {% block body %}{% endblock %}
-
+        {% block javascripts %} {% endblock %}
         {% include "frontend/Pie_Pagina.html.twig" %}
-        {% block javascripts %}        {% endblock %}
+
     </body>
 </html>

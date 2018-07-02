@@ -333,4 +333,38 @@ class FrontendController extends Controller
             'servicios' => $servicios
         ));
     }
+
+    /**
+     * @Route("/biblioteca_formacion", name="biblioteca_formacion")
+     */
+    public function formacionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $docentes = $em->getRepository('App:Usuarios')->findByEsDocente(True);
+        $masters = $em->getRepository('App:Usuarios')->findByEsMaster(True);
+        $doctores = $em->getRepository('App:Usuarios')->findByEsDoctor(True);
+        $ProfesorI = $em->getRepository('App:Usuarios')->findBycategoriadocente("Profesor Instructor");
+        $ProfesorA = $em->getRepository('App:Usuarios')->findBycategoriadocente("Profesor Asistente");
+        $ProfesorAux = $em->getRepository('App:Usuarios')->findBycategoriadocente("Profesor Auxiliar");
+        $ProfesorT = $em->getRepository('App:Usuarios')->findBycategoriadocente("Profesor Titular");
+        $Adiestrados = $em->getRepository('App:Usuarios')->findByEsAdiestrado(True);
+        $AsignaturaServicioPregrado = $em->getRepository('App:AsignaturaServicioPregrado')->findAll();
+        $Semestre = $em->getRepository('App:Semestre')->findAll();
+        $Postgrado = $em->getRepository('App:ActividadPostgrado')->findAll();
+
+
+        return $this->render('frontend/formacion.html.twig', array(
+            'docentes' => $docentes,
+            'masters' => $masters,
+            'doctores' => $doctores,
+            'ProfesorI' => $ProfesorI,
+            'ProfesorA' => $ProfesorA,
+            'ProfesorAux' => $ProfesorAux,
+            'ProfesorT' => $ProfesorT,
+            'Adiestrados' => $Adiestrados,
+            'AsignaturaServicioPregrado' => $AsignaturaServicioPregrado,
+            'Semestre' => $Semestre,
+            'Postgrado' => $Postgrado,
+        ));
+    }
 }

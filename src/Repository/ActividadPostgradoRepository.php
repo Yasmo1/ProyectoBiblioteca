@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ActividadPostgrado;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query;
 
 /**
  * @method ActividadPostgrado|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,39 @@ class ActividadPostgradoRepository extends ServiceEntityRepository
         parent::__construct($registry, ActividadPostgrado::class);
     }
 
+    public function PostgradoDESC()
+    {
+        $em=$this->getEntityManager();
+        $value = 1;
+        $dqlmio = "SELECT a FROM App\Entity\ActividadPostgrado a ORDER BY a.fechainicio DESC";
+        $query = $em->createQuery($dqlmio);
+
+        $elements= $query->getResult(Query::HYDRATE_ARRAY);
+        $result = array();
+        $i = 0;
+        foreach ($elements as $element){
+            $result[$i++] =  $element;
+        }
+        return $result;
+
+    }
+
 //    /**
 //     * @return ActividadPostgrado[] Returns an array of ActividadPostgrado objects
 //     */
-    /*
-    public function findByExampleField($value)
+
+    /*public function findByfechainicio($value)
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('a.id', 'DSC')
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
-    }
-    */
+    }*/
+
 
     /*
     public function findOneBySomeField($value): ?ActividadPostgrado
