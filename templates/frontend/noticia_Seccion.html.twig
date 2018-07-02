@@ -1,0 +1,19 @@
+<a href="#">
+    <img class="img-responsive Mi_img img-rounded" src="{{ asset('files/images/'~news.image) }}"
+         alt="Imagen de {{ news.titulo }}"/>
+
+    <h3 class="Estilo_Enunciado_Noticias_Portada">{{ news.titulo }}</h3>
+
+    <p class="Estilo_Noticias_Portada1">{{ news.resumen }}</p>
+</a>
+<span
+        data-container="body"
+        data-toggle="popover"
+        data-trigger="hover"
+        data-placement="top"
+        data-content="Cantidad de comentarios recibidos"
+        class="glyphicon glyphicon-comment">
+
+</span>
+{{ " " ~ news.getComentarios()|length ~ " " }}<strong>Comentarios</strong>
+<p class="Estilo_Servicios_Principales_Enunciado pull-right"> {{ news.getAutorNoticia }}</p>

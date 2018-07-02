@@ -389,4 +389,16 @@ class FrontendController extends Controller
 
         ));
     }
+
+    /**
+     * @Route("/biblioteca_noticias", name="biblioteca_noticias")
+     */
+    public function noticiasAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository('App:Noticias')->getPublicNews();
+        return $this->render('frontend/noticias.html.twig',array(
+            'news'=>$news
+        ));
+    }
 }

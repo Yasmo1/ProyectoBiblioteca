@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <br>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+
+                    {% if news|length <= 2 %}
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                {% if news[0] is defined %}
+                                    {% include 'frontend/noticia_Seccion.html.twig' with {'news': news[0]}%}
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                {% if news[1] is defined %}
+                                    {% include 'frontend/noticia_Seccion.html.twig' with {'news': news[1]}%}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    {% else %}
+                        {% for i in range(0, news|length/2, 2) %}
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    {% if news[i] is defined %}
+                                        {% include 'frontend/noticia_Seccion.html.twig' with {'news': news[i]}%}
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    {% if news[i+1] is defined %}
+                                        {% include 'frontend/noticia_Seccion.html.twig' with {'news': news[i+1]}%}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
