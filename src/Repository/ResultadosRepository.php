@@ -22,19 +22,19 @@ class ResultadosRepository extends ServiceEntityRepository
 //    /**
 //     * @return Resultados[] Returns an array of Resultados objects
 //     */
-    /*
-    public function findByExampleField($value)
+
+    public function findByanno($value)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.anno = :val')
             ->setParameter('val', $value)
             ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Resultados

@@ -162,6 +162,11 @@ class Usuarios
      */
     private $EsAdiestrado;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Resultados", mappedBy="JefeProyecto")
+     */
+    private $resultados;
+
     public function __construct()
     {
         $this->grupodetrabajo = new ArrayCollection();
@@ -172,6 +177,7 @@ class Usuarios
         $this->pIIs = new ArrayCollection();
         $this->sitiosWebCRAIs = new ArrayCollection();
         $this->tecnologias = new ArrayCollection();
+        $this->resultados = new ArrayCollection();
     }
 
     public function setImageFile(File $image = null)
@@ -662,6 +668,37 @@ class Usuarios
     public function setEsAdiestrado(?bool $EsAdiestrado): self
     {
         $this->EsAdiestrado = $EsAdiestrado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Resultados[]
+     */
+    public function getResultados(): Collection
+    {
+        return $this->resultados;
+    }
+
+    public function addResultado(Resultados $resultado): self
+    {
+        if (!$this->resultados->contains($resultado)) {
+            $this->resultados[] = $resultado;
+            $resultado->setJefeProyecto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResultado(Resultados $resultado): self
+    {
+        if ($this->resultados->contains($resultado)) {
+            $this->resultados->removeElement($resultado);
+            // set the owning side to null (unless already changed)
+            if ($resultado->getJefeProyecto() === $this) {
+                $resultado->setJefeProyecto(null);
+            }
+        }
 
         return $this;
     }

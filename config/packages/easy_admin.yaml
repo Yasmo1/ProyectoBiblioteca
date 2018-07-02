@@ -38,6 +38,7 @@ easy_admin:
                  children:
                    - { label: 'Investigaciones', entity: 'Investigaciones' }
                    - { label: 'Proyectos', entity: 'PII' }
+                   - { label: 'Linia de Investigación', entity: 'Liniainvestigacion' }
                    - { label: 'Resultados', entity: 'Resultados' }
                - label: 'Noticias'
                  children:
@@ -104,6 +105,20 @@ easy_admin:
                       - fechainicio
                       - fechafin
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - descripcion
+           Liniainvestigacion:
+               class: App\Entity\Liniainvestigacion
+               list:
+                  title: "Liniainvestigacion"
+                  actions:
+                      - { name: 'show', icon: 'search', label: ' ' }
+                      - { name: 'edit', icon: 'edit', label: ' '}
+                      - { name: 'delete', type: 'method', label: ' ', icon: 'trash' }
+               form:
+                  title: "Nueva Liniainvestigacion"
+                  fields:
+                      - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
+                      - { property: 'nombre', label: 'Nombre', type: 'text' }
                       - descripcion
            Tecnologias:
                class: App\Entity\Tecnologias
@@ -183,12 +198,11 @@ easy_admin:
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - { property: 'proyecto', label: 'Proyecto', type: 'text' }
                       - { property: 'Resultado', label: 'Resultado', type: 'text' }
-                      - { property: 'autor', label: 'Autor', type: 'text' }
-                      - { property: 'autor', label: 'Autor', type: 'text' }
+                      - JefeProyecto
                       - { property: 'tiporesultado', label: 'Tipo', type: 'choice', type_options: { multiple: false, choices: { 'Maestria': 'Maestria', 'Doctorado': 'Doctorado' } } }
                       - { type: 'group', css_class: 'col-sm-4', label: 'Periodo' }
-                      - fechainicio
-                      - fechafin
+                      - { property: 'anno', label: 'Año', type: 'integer', help: 'Ejemplo 2010' }
+                      - lineaI
                       - { type: 'group', css_class: 'col-sm-4', label: 'Informacion' }
                       - relevancia
            OrganismosPostgrado:

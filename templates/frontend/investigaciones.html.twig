@@ -1,0 +1,264 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-lg-7 col-md-7 col-sm-7">
+
+            <div class="Mi_Biblioteca_container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page-header">
+                            <h3 class="Estilo_Enunciado_Noticias">Investigaciones</h3>
+                        </div>
+                        <br>
+                        <ul class="list-unstyled">
+                            <li>
+                                <div id="pi">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias"> Proyectos de interes institucional (PI)</h2>
+                                    <ul class="list-unstyled">
+                                        {% for pii in PII %}
+                                            {% if pii.tipo == "Proyecto de Interes Institucional" %}
+                                            <li>
+                                                <p class="Estilo_Noticias">
+                                                  <strong> {{ pii.Alias }} </strong>{{ pii.nombre }}
+                                                </p>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <img class="img-responsive img-rounded" alt="no disponible" width="120"
+                                                             src="{{ asset('files/fotostrabajadores/'~pii.JefeProyecto.image) }}"/>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 Mi_Margen_Superior">
+
+                                                        <div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Jefe de Proyecto:</div>
+
+                                                        <a href="mailto:{{  pii.JefeProyecto.correo }}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                                                                {% if  pii.JefeProyecto.EsDoctor %}
+                                                                    Dr.C.
+                                                                {% elseif pii.JefeProyecto.EsMaster %}
+                                                                    Ms.C.
+                                                                    {% endif %}
+                                                                {{ pii.JefeProyecto.nombre }}
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <p class="Estilo_Noticias">
+                                                    {{ pii.descripcion }}
+                                                </p>
+                                                <br>
+
+                                            </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+
+                                <div id="pint">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias">  Proyectos internacionales </h2>
+                                    <ul class="list-unstyled">
+                                        {% for pii in PII %}
+                                            {% if pii.tipo == "Proyecto Internacional" %}
+                                                <li>
+                                                    <p class="Estilo_Noticias">
+                                                        {{ pii.Alias }} {{ pii.nombre }}
+                                                    </p>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <img class="img-responsive img-rounded" alt="no disponible" width="120"
+                                                                 src="{{ asset('files/fotostrabajadores/'~pii.JefeProyecto.image) }}"/>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 Mi_Margen_Superior">
+
+                                                            <div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Jefe de Proyecto:</div>
+
+                                                            <a href="mailto:{{  pii.JefeProyecto.correo }}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                                                                    {% if  pii.JefeProyecto.EsDoctor %}
+                                                                        Dr.C.
+                                                                    {% elseif pii.JefeProyecto.EsMaster %}
+                                                                        Ms.C.
+                                                                    {% endif %}
+                                                                    {{ pii.JefeProyecto.nombre }}
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <p class="Estilo_Noticias">
+                                                        {{ pii.descripcion }}
+                                                    </p>
+                                                    <br>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+
+                                <div id="inv">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias">  Investigaciones doctorales en curso </h2>
+                                    <ul class="list-unstyled">
+                                        {% for inve in Investigaciones %}
+                                            {% if inve.Tipo == "Doctorado" %}
+                                                <li>
+                                                    <p class="Estilo_Noticias">
+                                                        <strong>Tema:</strong>  {{ inve.Tema }}
+                                                    </p>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <img class="img-responsive img-rounded" alt="no disponible" width="120"
+                                                                 src="{{ asset('files/fotostrabajadores/'~inve.JefeProyecto.image) }}"/>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 Mi_Margen_Superior">
+
+                                                            <div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Jefe de Proyecto:</div>
+
+                                                            <a href="mailto:{{  inve.JefeProyecto.correo }}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                                                                    {% if  inve.JefeProyecto.EsDoctor %}
+                                                                        Dr.C.
+                                                                    {% elseif inve.JefeProyecto.EsMaster %}
+                                                                        Ms.C.
+                                                                    {% endif %}
+                                                                    {{ inve.JefeProyecto.nombre }}
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <p class="Estilo_Noticias">
+                                                        {{ inve.descripcion }}
+                                                    </p>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+
+                                <div id="invm">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias">  Investigaciones de maestría en curso </h2>
+                                    <ul class="list-unstyled">
+                                        {% for inve in Investigaciones %}
+                                            {% if inve.Tipo == "Maestria" %}
+                                                <li>
+                                                    <p class="Estilo_Noticias">
+                                                        <strong>Tema:</strong>  {{ inve.Tema }}
+                                                    </p>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <img class="img-responsive img-rounded" alt="no disponible" width="120"
+                                                                 src="{{ asset('files/fotostrabajadores/'~inve.JefeProyecto.image) }}"/>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 Mi_Margen_Superior">
+
+                                                            <div class="Estilo_Enunciado_Biblioteca_MasInformacion_Bold">Jefe de Proyecto:</div>
+
+                                                            <a href="mailto:{{  inve.JefeProyecto.correo }}"><div class="Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                                                                    {% if  inve.JefeProyecto.EsDoctor %}
+                                                                        Dr.C.
+                                                                    {% elseif inve.JefeProyecto.EsMaster %}
+                                                                        Ms.C.
+                                                                    {% endif %}
+                                                                    {{ inve.JefeProyecto.nombre }}
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <p class="Estilo_Noticias">
+                                                        {{ inve.descripcion }}
+                                                    </p>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="resul">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias">  Principales resultados {{ anno }} </h2>
+                                    <ul class="list-unstyled">
+                                        {% for resulta in Resultados %}
+                                            <li>
+                                                <p class="Estilo_Noticias">
+                                                    <strong>Proyecto</strong>: {{ resulta.proyecto }}
+                                                    <br>
+                                                    <strong>Resultado</strong>: {{ resulta.Resultado }}
+                                                    <br>
+                                                    <strong>Autora</strong>:  {{ resulta.JefeProyecto.nombre }}
+                                                    <br>
+                                                    <strong>Tipo de resultado</strong>:  Tesis de {{ resulta.tiporesultado }}
+                                                    <br>
+                                                    <strong>Relevancia</strong>: {{ resulta.relevancia }}
+                                                </p>
+
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+
+                                <div id="lin">
+                                    <br><br><br>
+                                    <h2 class="Estilo_Enunciado_Noticias">  Lineas </h2>
+                                    <ul class="list-unstyled Estilo_Noticias">
+                                        {% for linea in Liniainvestigacion %}
+                                            <li>
+                                                {{ linea.nombre }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="Mi_jumbotron">
+                <div class="container">
+                    <div class="Mi_page-header_biblioteca">
+                        <h2 class="Estilo_Enunciado_Servicios_Principales">Navegar por</h2>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#pi"> <div class="Estilo_Servicios_Principales">Proyectos institucionales</div></a>
+                        </li>
+                        <li>
+                            <a href="#pint"><div class="Estilo_Servicios_Principales"> Proyectos internacionales</div></a>
+                        </li>
+                        <li>
+                            <a href="#inv"> <div class="Estilo_Servicios_Principales">Investigaciones en curso</div></a>
+                        </li>
+                        <li>
+                            <a href="#resul"> <div class="Estilo_Servicios_Principales">Principales resultados</div></a>
+                        </li>
+                        <li>
+                            <a href="#lin"><div class="Estilo_Servicios_Principales"> L&iacute;neas de investigaci&oacute;n</div></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

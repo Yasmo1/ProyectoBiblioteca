@@ -367,4 +367,26 @@ class FrontendController extends Controller
             'Postgrado' => $Postgrado,
         ));
     }
+
+    /**
+     * @Route("/biblioteca_investigaciones", name="biblioteca_investigaciones")
+     */
+    public function investigacionesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $PII = $em->getRepository('App:PII')->findAll();
+        $Investigaciones = $em->getRepository('App:Investigaciones')->findAll();
+        $Liniainvestigacion = $em->getRepository('App:Liniainvestigacion')->findAll();
+        $hoy = getdate();
+        $Resultados = $em->getRepository('App:Resultados')->findByanno($hoy ['year']-1);
+
+        return $this->render('frontend/investigaciones.html.twig', array(
+            'PII' => $PII,
+            'Investigaciones' => $Investigaciones,
+            'Resultados' => $Resultados,
+            'anno' => $hoy ['year']-1,
+            'Liniainvestigacion' => $Liniainvestigacion,
+
+        ));
+    }
 }

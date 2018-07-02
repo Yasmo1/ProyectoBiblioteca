@@ -17,16 +17,6 @@ class Resultados
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $fechainicio;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $fechafin;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $proyecto;
@@ -39,11 +29,6 @@ class Resultados
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $autor;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $tiporesultado;
 
     /**
@@ -52,9 +37,19 @@ class Resultados
     private $relevancia;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $lineainvestigacion;
+    private $anno;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuarios", inversedBy="resultados")
+     */
+    private $JefeProyecto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Liniainvestigacion", inversedBy="resultados")
+     */
+    private $lineaI;
 
     public function getId()
     {
@@ -64,30 +59,6 @@ class Resultados
     public function __tostring()
     {
         return (string)$this->Resultado;
-    }
-
-    public function getFechainicio(): ?\DateTimeInterface
-    {
-        return $this->fechainicio;
-    }
-
-    public function setFechainicio(\DateTimeInterface $fechainicio): self
-    {
-        $this->fechainicio = $fechainicio;
-
-        return $this;
-    }
-
-    public function getFechafin(): ?\DateTimeInterface
-    {
-        return $this->fechafin;
-    }
-
-    public function setFechafin(\DateTimeInterface $fechafin): self
-    {
-        $this->fechafin = $fechafin;
-
-        return $this;
     }
 
     public function getProyecto(): ?string
@@ -110,18 +81,6 @@ class Resultados
     public function setResultado(?string $Resultado): self
     {
         $this->Resultado = $Resultado;
-
-        return $this;
-    }
-
-    public function getAutor(): ?string
-    {
-        return $this->autor;
-    }
-
-    public function setAutor(string $autor): self
-    {
-        $this->autor = $autor;
 
         return $this;
     }
@@ -150,14 +109,38 @@ class Resultados
         return $this;
     }
 
-    public function getLineainvestigacion(): ?string
+    public function getAnno(): ?int
     {
-        return $this->lineainvestigacion;
+        return $this->anno;
     }
 
-    public function setLineainvestigacion(string $lineainvestigacion): self
+    public function setAnno(int $anno): self
     {
-        $this->lineainvestigacion = $lineainvestigacion;
+        $this->anno = $anno;
+
+        return $this;
+    }
+
+    public function getJefeProyecto(): ?Usuarios
+    {
+        return $this->JefeProyecto;
+    }
+
+    public function setJefeProyecto(?Usuarios $JefeProyecto): self
+    {
+        $this->JefeProyecto = $JefeProyecto;
+
+        return $this;
+    }
+
+    public function getLineaI(): ?Liniainvestigacion
+    {
+        return $this->lineaI;
+    }
+
+    public function setLineaI(?Liniainvestigacion $lineaI): self
+    {
+        $this->lineaI = $lineaI;
 
         return $this;
     }
