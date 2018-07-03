@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Comentarios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Comentarios|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,29 @@ class ComentariosRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Comentarios::class);
+    }
+
+    public function getPaginatePosts($pageSize=5,$currentPage,$noticia_id)
+    {
+        $em=$this->getEntityManager();
+
+        //Consulta DQL
+        //$dql = "SELECT p FROM Biblioteca\BibliotecaBundle\Entity\Comentarios p ORDER BY p.id DESC";
+        $dqlmio = "SELECT p FROM App\Entity\Comentarios p
+                    WHERE p.noticia_id = :noticia AND p.publicado = :publicado
+                  ORDER BY p.id DESC";
+        $query = $em->createQuery($dqlmio)->setParameters(
+            array(
+                '$noticia_id' => $noticia_id,
+                'publicado' => 1,
+            )
+        )
+            ->setFirstResult($pageSize * ($currentPage - 1))
+            ->setMaxResults($pageSize);
+
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+
+        return $paginator;
     }
 
 //    /**

@@ -1,0 +1,309 @@
+{% extends 'base.html.twig' %}
+{% block mensajes %}
+    <div class="container Mi_pading">
+        <br>
+        <div class="Mi_container">
+            <div class="row Mi_Margen_Left">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="Mis_Mensajes" class="row-fluid">
+
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                            {% for flashMessage in flashMessages %}
+                                <div id="flash-messages" class="alert alert-{{ type }}">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ flashMessage|trans }}
+                                </div>
+                                <script type="text/javascript">
+                                    /* <![CDATA[ */
+                                    setTimeout('$("#flash-messages").hide("normal")', 5000);
+                                    /* ]]> */
+                                </script>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block body %}
+    <div class="container Mi_pading">
+        <div class="Mi_container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <h3 class="Estilo_Enunciado_Noticias">{{ news.titulo }}</h3>
+                            <div class="page-header">
+
+                                <p class="Estilo_Noticias">Fecha de creaci&oacute;n del Art&iacute;culo:{{ " " ~ news.fecha|date("m/d/Y  g:ia") }} </p>
+                                <div class="pull-right">Foto:  {{ news.getAutorFotoPortada() }}</div>
+                            </div>
+                            <img class="img-responsive Mi_img img-rounded"  src="{{ asset('files/images/'~news.image) }}" alt="Imagen de {{ news.titulo }}">
+                            <br><br>
+
+
+                            <div class="Estilo_Noticias">{{ news.cuerpo|raw }}</div>
+                            <br><br>
+                            <p class="Estilo_Servicios_Principales_Enunciado pull-right"> {{ news.getAutorNoticia }}</p>
+                            <br><br>
+                            <br>
+
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                    <div class="Mi_panel Mi_panel-default">
+                                        <div class="Mi_panel-heading">
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-2 col-sm-4">
+                                                    <h4>Comp&aacute;rtelo</h4>
+                                                </div>
+
+                                                <div class="col-lg-1 col-md-1 col-sm-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Facebook"
+                                                           href="javascript: void(0);"">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 col-md-1 col-sm-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Twitter"
+                                                           href="javascript: void(0);"onclick="window.open('http://twitter.com/home?status={{ news.titulo~"        " }}@Crai_Upr','popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/social19.svg') }} " alt="Twitter">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7 col-sm-2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="Mi_panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                                    <form class="form-horizontal" role="form" action="{{ path('biblioteca_noticia_Apliada_Nuevo_Comentario',{'noticia_id':news.id}) }}"
+                                                          method="post">
+                                                        {{ form_errors(form) }}
+                                                        <div class="form-group">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label for="flash-messages" class="control-label">Nombre</label>
+                                                                {{ form_widget(form.nombre) }}
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label for="flash-messages" class="control-label">Email</label>
+                                                                {{ form_widget(form.email) }}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-lg-12">
+                                                                <label for="flash-messages" class="control-label">Su comentario</label>
+                                                                {{ form_widget(form.cuerpo_comen) }}
+                                                            </div>
+
+                                                        </div>
+                                                        {{ form_widget(form._token) }}
+
+                                                        <div class="form-actions">
+                                                            <button type="submit" class="btn Estilo_btn_Form pull-right"><i
+                                                                        class="icon-ok"></i> {{ 'Enviar' | trans }}</button>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+
+
+                                                    <ul class="list-group Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                                                        <li class="list-group-item">
+                                                            <span class="badge">-</span>
+                                                            Mostrar respeto a los criterios en sus comentarios.
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="badge">-</span>
+                                                            No ofender, ni usar frases vulgares y/o palabras obscenas.
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="badge">-</span>
+                                                            Nos reservaremos el derecho de moderar aquellos comentarios que no cumplan con las reglas de uso.
+                                                        </li>
+                                                    </ul>
+
+
+
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            {% set i = 1 %}
+                            {% for comentario in news.getComentarios() %}
+                                {% if comentario.publicado %}
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <div class="well">
+                                                <div class="container">
+                                                    <p class="Estilo_Noticias"><strong>{{ comentario.nombre }}</strong> dijo:</p>
+                                                    <button type="button" class="btn btn-default btn-xs" onclick="ComentarioRespuesta({{ comentario.id }})"  data-toggle="modal" data-target="#myModal_Responder">Responder</button>
+                                                    <br>
+                                                    <span class="glyphicon glyphicon-comment"></span>{{" " ~  i }}
+                                                    <p class="Estilo_Noticias">{{ comentario.fecha|date("d/m/Y") }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8">
+                                            <p class="Estilo_Noticias">{{ comentario.getCuerpoComen() }}</p>
+                                        </div>
+                                    </div>
+                                    {% for respuesta in comentario.getRespuesta() %}
+                                        {% if  respuesta.getPublicado %}
+                                            <div class="row">
+                                                <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <div class="well">
+                                                        <div class="container">
+                                                            <p class="Estilo_Noticias"><strong>{{ respuesta.nombre }}</strong> Respondi&oacute;:</p>
+
+
+                                                            <p class="Estilo_Noticias">{{ respuesta.fecha|date("d/m/Y") }}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7 col-sm-7">
+                                                    <p class="Estilo_Noticias">{{ respuesta.cuerpoComentario }}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% set i = i + 1 %}
+                                {% endif %}
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8">
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% include 'frontend/Responder_Modal.html.twig' with {'news': news, 'formRespuesta': formRespuesta}%}
+
+
+
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+
+
+                            <div class="page-header">
+                                <h3>Vea tambi&eacute;n</h3>
+                            </div>
+                            <div class="list-group">
+                                {% set max_s = (noticias_Similares|length < 5 ? noticias_Similares|length - 1: 5) %}
+                                {% for i in range(1,max_s) %}
+                                    {% if noticias_Similares[i] is defined  %}
+                                        {% if noticias_Similares[i].publica %}
+                                            <a href="{{ path('biblioteca_noticia_Apliada',{'noticia_id':noticias_Similares[i].id}) }}"
+                                               class="list-group-item {{ news.id == noticias_Similares[i].id ? "active" }}">
+                                        <span
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-trigger="hover"
+                                                data-placement="top"
+                                                data-content="Cantidad de comentarios recibidos"
+                                                class="glyphicon glyphicon-comment"></span>{{ " " ~ noticias_Similares[i].getComentarios()|length }}
+                                                <span
+                                                        data-container="body"
+                                                        data-toggle="popover"
+                                                        data-trigger="hover"
+                                                        data-placement="top"
+                                                        data-content="Cantidad de visitas recibidas a esta noticia"
+                                                        class="badge">{{ " " ~ noticias_Similares[i].visitas }}</span>
+                                                <h4 class="list-group-item-heading">{{ noticias_Similares[i].titulo }}</h4>
+                                                <p class="list-group-item-text">{{ noticias_Similares[i].resumen }}</p>
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="page-header">
+                                <h3>Otros Art&iacute;culos de <small>{{ " " ~ news.getAutorNoticia }}</small></h3>
+                            </div>
+                            <div class="list-group">
+                                {% set max_a = (noticias_mismo_autor|length < 3 ? noticias_mismo_autor|length - 1 : 3) %}
+                                {% for j in range(1,max_a) %}
+                                    {% if noticias_mismo_autor[j] is defined %}
+                                        {% if noticias_Similares[j].publica %}
+                                            <a href="{{ path('biblioteca_noticia_Apliada',{'noticia_id':noticias_mismo_autor[j].id}) }}"
+                                               class="list-group-item {{ news.id == noticias_mismo_autor[j].id ? "active" }}">
+                                        <span
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-trigger="hover"
+                                                data-placement="top"
+                                                data-content="Cantidad de comentarios recibidos"
+                                                class="glyphicon glyphicon-comment"></span>{{ " " ~ noticias_mismo_autor[j].getComentarios_Publicados|length }}
+                                                <span
+                                                        data-container="body"
+                                                        data-toggle="popover"
+                                                        data-trigger="hover"
+                                                        data-placement="top"
+                                                        data-content="Cantidad de visitas recibidas a esta noticia"
+                                                        class="badge">{{noticias_mismo_autor[j].visitas }}</span>
+                                                <h4 class="list-group-item-heading">{{ noticias_mismo_autor[j].titulo }}</h4>
+                                                <p class="list-group-item-text">{{ noticias_mismo_autor[j].resumen }}</p>
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        function ComentarioRespuesta(id)
+        {
+            document.getElementById('id_comentario_respuesta').value = id;
+        }
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+
+        });
+    </script>
+
+{% endblock %}

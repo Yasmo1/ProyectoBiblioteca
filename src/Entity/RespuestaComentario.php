@@ -99,12 +99,12 @@ class RespuestaComentario
         return $this;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha()
     {
         return $this->fecha;
     }
 
-    public function setFecha(\DateTimeInterface $fecha): self
+    public function setFecha($fecha)
     {
         $this->fecha = $fecha;
 

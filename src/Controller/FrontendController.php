@@ -3,14 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Quienreserva;
+use App\Entity\RespuestaComentario;
 use App\Entity\Vguiada;
 use App\Form\ContactoType;
 use App\Form\QuienreservaType;
+use App\Form\RespuestaComentarioType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\VGuiadaType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Contacto;
+use App\Entity\Comentarios;
+use App\Form\ComentariosType;
+
 
 class FrontendController extends Controller
 {
@@ -399,6 +404,127 @@ class FrontendController extends Controller
         $news = $em->getRepository('App:Noticias')->getPublicNews();
         return $this->render('frontend/noticias.html.twig',array(
             'news'=>$news
+        ));
+    }
+
+    /**
+     * @Route("/biblioteca_noticia_Apliada_Nuevo_Comentario/{noticia_id}", name="biblioteca_noticia_Apliada_Nuevo_Comentario")
+     */
+    public function noticia_Ampliada_Nuevo_Comentario(Request $request, $noticia_id)
+    {
+        $entity = new Comentarios();
+        $form = $this->createForm(ComentariosType::class, $entity);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $noticia = $em->getRepository('App:Noticias')->find($noticia_id);
+
+        if ($form->isSubmitted() &&  $form->isValid())
+        {
+            $entity = $entity->setNoticiaId($noticia);
+            $new_date= new \DateTime();
+            $entity->setFecha($new_date);
+            $entity->setPublicado(false);
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Su Comentario fue enviado satisfacoriamente.');
+            /*
+            // Aqui enviar la informacion al correo
+            $message = \Swift_Message::newInstance();
+            $em = $this->getDoctrine()->getManager();
+            $senders = $em->getRepository('BibliotecaBundle:Backends')-> getEmailsFromAdmins();
+            $message->setFrom(array(
+                "biblioteca@upr.edu.cu"=>"Sitio ICT"
+            ))
+                ->setSubject("Nuevo Comentario sobre el Articulo".$noticia->getTitulo())
+                ->setTo($senders)
+                ->setBody(
+                    $this->renderView( 'BibliotecaBundle:Default:mail_NuevoComentario.html.twig', array(
+                        'id'      => $entity->getId(),
+                        'nombre'       => $entity->getNombre(),
+                        'correo'  => $entity->getEmail(),
+                        'comentario'    => $entity->getCuerpoComen(),
+                        'mensaje' => 'Comentario a noticia'
+                    ) )
+                )
+                ->setContentType( 'text/html' );
+            $this->get( 'mailer' )->send( $message );
+            */
+        }
+
+        return $this->noticia_AmpliadaAction($noticia_id);
+
+    }
+
+    /**
+     * @Route("/biblioteca_noticia_Apliada_Nuevo_RespuestaComentario/{noticia_id}", name="biblioteca_noticia_Apliada_Nuevo_RespuestaComentario")
+     */
+    public function noticia_Ampliada_Nueva_Respuesta(Request $request, $noticia_id)
+    {
+        $entity = new RespuestaComentario();
+        $form = $this->createForm(RespuestaComentarioType::class, $entity);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($form->isSubmitted() &&  $form->isValid())
+        {
+            $comentario = $em->getRepository('App:Comentarios')->find($_POST['id_comentario_respuesta']);
+            $entity = $entity->setComentario($comentario);
+            $new_date= new \DateTime();
+            $entity->setFecha($new_date);
+            $entity->setPublicado(false);
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'Su Comentario fue enviado satisfacoriamente.');
+            /*
+            // Aqui enviar la informacion al correo
+            $message = \Swift_Message::newInstance();
+            $em = $this->getDoctrine()->getManager();
+            $senders = $em->getRepository('BibliotecaBundle:Backends')-> getEmailsFromAdmins();
+            $message->setFrom(array(
+                "biblioteca@upr.edu.cu"=>"Sitio ICT"
+            ))
+                ->setSubject("Nuevo Comentario sobre el Articulo".$noticia->getTitulo())
+                ->setTo($senders)
+                ->setBody(
+                    $this->renderView( 'BibliotecaBundle:Default:mail_NuevoComentario.html.twig', array(
+                        'id'      => $entity->getId(),
+                        'nombre'       => $entity->getNombre(),
+                        'correo'  => $entity->getEmail(),
+                        'comentario'    => $entity->getCuerpoComen(),
+                        'mensaje' => 'Comentario a noticia'
+                    ) )
+                )
+                ->setContentType( 'text/html' );
+            $this->get( 'mailer' )->send( $message );
+            */
+        }
+
+        return $this->noticia_AmpliadaAction($noticia_id);
+
+    }
+    /**
+     * @Route("/biblioteca_noticia_Apliada/{noticia_id}", name="biblioteca_noticia_Apliada")
+     */
+    public function noticia_AmpliadaAction($noticia_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $noticia = $em->getRepository('App:Noticias')->find($noticia_id);
+        $noticias_por_misma_tematica = $em->getRepository('App:Noticias')->findBy(array('tematica' => $noticia->getTematica()),array('id' => 'DESC'));
+        $noticias_por_mismo_autor = $em->getRepository('App:Noticias')->findBy(array('autor_noticia' => $noticia->getAutorNoticia()),array('id' => 'DESC'));
+
+        $entity = new Comentarios();
+        $form = $this->createForm(ComentariosType::class,$entity);
+
+        $entity_Respuesta = new RespuestaComentario();
+        $form_Respuesta = $this->createForm(RespuestaComentarioType::class,$entity_Respuesta);
+
+        return $this->render('frontend/noticia_Ampliada.html.twig', array(
+            'news' => $noticia,
+            'entity' => $entity,
+            'form' => $form->createView(),
+            'noticias_Similares' => $noticias_por_misma_tematica,
+            'noticias_mismo_autor' => $noticias_por_mismo_autor,
+            'formRespuesta' => $form_Respuesta->createView()
         ));
     }
 }

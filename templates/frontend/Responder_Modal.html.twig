@@ -1,0 +1,75 @@
+<div class="modal fade" id="myModal_Responder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &#215;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><strong>Tu respuesta es</strong> </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <form class="form-horizontal" role="form" action="{{ path('biblioteca_noticia_Apliada_Nuevo_RespuestaComentario',{'noticia_id':news.id}) }}"
+                              method="post" }}>
+                            {{ form_errors(formRespuesta) }}
+                            <div class="form-group">
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="flash-messages" class="control-label">Nombre</label>
+                                    {{ form_widget(formRespuesta.nombre) }}
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <label for="flash-messages" class="control-label">Email</label>
+                                    {{ form_widget(formRespuesta.correo) }}
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 hide">
+                                    <label for="flash-messages" class="control-label">Email</label>
+                                    <input type="text" class="form-control hide" name="id_comentario_respuesta" id="id_comentario_respuesta">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label for="flash-messages" class="control-label">Su comentario</label>
+                                    {{ form_widget(formRespuesta.cuerpoComentario) }}
+                                </div>
+
+                            </div>
+                            {{ form_widget(formRespuesta._token) }}
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn Estilo_btn_Form pull-right"><i
+                                            class="icon-ok"></i> {{ 'Enviar' | trans }}</button>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+
+
+                        <ul class="list-group Estilo_Enunciado_Biblioteca_MasInformacion_Nombres_Bold">
+                            <li class="list-group-item">
+                                <span class="badge">-</span>
+                                Mostrar respeto a los criterios en sus comentarios.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">-</span>
+                                No ofender, ni usar frases vulgares y/o palabras obscenas.
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">-</span>
+                                Nos reservaremos el derecho de moderar aquellos comentarios que no cumplan con las reglas de uso.
+                            </li>
+                        </ul>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
