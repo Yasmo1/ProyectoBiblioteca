@@ -527,4 +527,12 @@ class FrontendController extends Controller
             'formRespuesta' => $form_Respuesta->createView()
         ));
     }
+
+    /**
+     * @Route("/biblioteca_buscar", name="biblioteca_buscar")
+     */
+    public function buscar_VistaAction()
+    {
+        return $this->render('frontend/buscar_Vista.html.twig');
+    }
 }

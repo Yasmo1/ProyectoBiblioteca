@@ -34,7 +34,7 @@
                     <a href="{{ path('biblioteca_noticias') }}">Noticias</a>
                 </li>
                 <li class="hidden-sm">
-                    <a target="_blank" href="https://biblioteca.upr.edu.cu">Blog</a>
+                    <a href="http://blogcrai.upr.edu.cu">Blog</a>
                 </li>
 
                 <li class="dropdown hidden-xs hidden-lg hidden-md">
@@ -43,13 +43,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="visible-sm">
-                            <a href="#">Investigaciones</a>
+                            <a href="{{ path('biblioteca_investigaciones') }}">Investigaciones</a>
                         </li>
                         <li class="visible-sm">
-                            <a href="#">Noticias</a>
+                            <a href="{{ path('biblioteca_noticias') }}">Noticias</a>
                         </li>
                         <li class="visible-sm">
-                            <a target="_blank" href="https://biblioteca.upr.edu.cu">Blog</a>
+                            <a href="http://blogcrai.upr.edu.cu">Blog</a>
                         </li>
                     </ul>
                 </li>
@@ -71,36 +71,20 @@
                         <ul class="dropdown-menu">
                             {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_EDITOR") %}
                                 <li>
-                                    <a href="#">
+                                    <a href="http://localhost:8000/seguroadmin/">
                                         <span class="glyphicon glyphicon-wrench"></span>
                                         Administrar
                                     </a>
                                 </li>
                             {% endif %}
-                            {% if is_granted("ROLE_DICT") or  is_granted("ROLE_DICT_ADMIN") %}
-                                <li>
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-open"></span>
-                                        CRAI
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% if is_granted("ROLE_DICT") or  is_granted("ROLE_DICT_ADMIN") %}
-                                <!-- <li>
-                                        <a href="{{ path('escritorio') }}">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                            Mi Escritorio
-                                        </a>
-                                    </li>-->
-                            {% endif %}
                             <li>
-                                <a href="#">
+                                <a href="{{ path('biblioteca_buscar') }}">
                                     <span class="glyphicon glyphicon-search"></span>
                                     Buscar
                                 </a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="#">
+                            <li><a href="{{ path('fos_user_security_logout') }}">
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                                 </a>
@@ -109,12 +93,12 @@
                     </li>
                 {% else %}
                     <li>
-                        <a class="" href="#">
+                        <a class="" href="{{ path('fos_user_security_login') }}">
                             <div><span class="glyphicon glyphicon-user"></span></div>
                         </a>
                     </li>
                     <li>
-                        <a class="" href="#">
+                        <a class="" href="{{ path('biblioteca_buscar') }}">
                             <div><span class="glyphicon glyphicon-search"></span></div>
                         </a>
                     </li>

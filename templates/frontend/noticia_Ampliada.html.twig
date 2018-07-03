@@ -71,7 +71,9 @@
                                                            data-trigger="hover"
                                                            data-placement="top"
                                                            data-content="Comparte esta noticia en Facebook"
-                                                           href="javascript: void(0);"">
+                                                           href="javascript: void(0);"
+                                                           onclick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=http://crai.upr.edu.cu/noticias/noticiasAmpliadas/{{ news.id }}&p[title]={{ news.titulo }}&p[summary]={{ news.resumen }}&&p[images][0]= {{ asset('files/images/'~news.image) }}',
+                                                                   'popup', 'toolbar=0, status=0, width=650, height=450');">
                                                             <img class="img-responsive Mi_pading_Peque"
                                                                  style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
                                                         </a>

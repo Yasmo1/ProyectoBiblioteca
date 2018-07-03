@@ -1,5 +1,160 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "bundles/FOSUserBundle/layout.html.twig" %}
 
 {% block fos_user_content %}
-    {{ include('@FOSUser/Security/login_content.html.twig') }}
-{% endblock fos_user_content %}
+    <div class="row Mi_Margen_Left">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+            <div class="row Mi_jumbotron">
+                <div class="container">
+                    <br>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <br><br>
+                        <div  id="IMG_Loguin_1">
+                            <img class="center-block img-responsive" width="80"
+                                 src="{{ asset('biblioteca/biblioteca/images/ICRAI/loguin.png') }}" alt=""/>
+                        </div>
+                        <div  id="IMG_Loguin_2">
+                            <img class="center-block img-responsive" width="80"
+                                 src="{{ asset('biblioteca/biblioteca/images/ICRAI/loguin1.png') }}" alt=""/>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5">
+                        <br>
+                        <h2 id="H2_Loguin_1" class="Estilo_Loquin">Utilice la misma contrase&ntilde;a del sistema de identidad de la UPR</h2>
+                        <h2 id="H2_Loguin_2" class="Estilo_Loquin1">Utilice la misma contrase&ntilde;a del sistema de identidad de la UPR</h2>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if error %}
+                                    <script type="text/javascript">
+                                        addLoadEvent = function (func) {
+                                            if (typeof jQuery != "undefined")jQuery(document).ready(func); else if (typeof wpOnload != 'function') {
+                                                wpOnload = func;
+                                            } else {
+                                                var oldonload = wpOnload;
+                                                wpOnload = function () {
+                                                    oldonload();
+                                                    func();
+                                                }
+                                            }
+                                        };
+                                        function s(id, pos) {
+                                            g(id).left = pos + 'px';
+                                        }
+                                        function g(id) {
+                                            return document.getElementById(id).style;
+                                        }
+                                        function shake(id, a, d) {
+                                            c = a.shift();
+                                            s(id, c);
+                                            if (a.length > 0) {
+                                                setTimeout(function () {
+                                                    shake(id, a, d);
+                                                }, d);
+                                            } else {
+                                                try {
+                                                    g(id).position = 'static';
+                                                    wp_attempt_focus();
+                                                } catch (e) {
+                                                }
+                                            }
+                                        }
+                                        addLoadEvent(function () {
+                                            var p = new Array(15, 30, 15, 0, -15, -30, -15, 0);
+                                            p = p.concat(p.concat(p));
+                                            var i = document.forms[0].id;
+                                            g(i).position = 'relative';
+                                            shake(i, p, 20);
+                                        });
+                                    </script>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ error|trans({}, 'FOSUserBundle') }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <form id="loginform" class="" role="form" action="{{ path("fos_user_security_check") }}"
+                              method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                            <div class="form-group">
+                                <h4 id="H4_1"
+                                    for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}
+                                </h4>
+                                <input class="form-control Mi_Input_Blanco_Radio" size="40" type="text" id="username"
+                                       name="_username" value="{{ last_username }}" required="required"/>
+
+                            </div>
+                            <div class="form-group">
+                                <h4 id="H4_2"
+                                    for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}
+                                    <br/>
+                                </h4>
+                                <input  class="form-control Mi_Input_Blanco_Radio" size="40" type="password"
+                                        id="password" name="_password" required="required"/>
+
+                            </div>
+                            <div class="checkbox">
+
+                                <input class="btn Estilo_btn_Form pull-right" type="submit" id="_submit" name="_submit"
+                                       value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+            <br><br><br><br><br><br>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <img class="center-block img-responsive" width="300"
+                         src="{{ asset('biblioteca/biblioteca/images/ICRAI/LogoOScuro.jpg') }}" alt=""/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+            </div>
+
+            <br><br><br><br>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#IMG_Loguin_2').hide();
+            $('#H2_Loguin_2').hide();
+            $('#H4_1').attr('class','Estilo_Noticias');
+            $('#H4_2').attr('class','Estilo_Noticias');
+
+            $('#username').on('keyup',function(){
+                $('#IMG_Loguin_1').hide();
+                $('#H2_Loguin_1').hide();
+
+                $('#IMG_Loguin_2').show();
+                $('#H2_Loguin_2').show();
+
+                $('#H4_1').attr('class','Estilo_Noticias_Azul');
+                $('#username').attr('class','form-control Mi_Input_Blanco_Radio_Azul');
+            });
+            $('#password').on('keyup',function(){
+                $('#IMG_Loguin_1').hide();
+                $('#H2_Loguin_1').hide();
+
+                $('#IMG_Loguin_2').show();
+                $('#H2_Loguin_2').show();
+
+                $('#H4_2').attr('class','Estilo_Noticias_Azul');
+                $('#password').attr('class','form-control Mi_Input_Blanco_Radio_Azul');
+            });
+        });
+    </script>
+
+{% endblock %}

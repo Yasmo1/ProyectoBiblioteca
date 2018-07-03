@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row Mi_Margen_Left Mi_pading">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="row Mi_jumbotron">
+                <div class="container">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <form action="http://lupa.upr.edu.cu" method="get" target="_blank">
+                            <div class="input-group input-group-lg Estilo_Buscar">
+                            <span class="input-group-addon Mi_Input_Blanco"><span
+                                        class="glyphicon glyphicon-search Mi_h3"></span></span>
+                                <input type="text" class="form-control Mi_Input_Blanco"
+                                       placeholder="B&uacute;squeda en Lupa">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                </div>
+            </div>
+            <br><br><br><br><br><br>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <img class="center-block img-responsive" width="300"
+                         src="{{ asset('biblioteca/biblioteca/images/ICRAI/LogoOScuro.jpg') }}" alt=""/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+            </div>
+
+            <br><br><br><br>
+        </div>
+    </div>
+
+{% endblock %}
