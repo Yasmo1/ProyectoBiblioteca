@@ -43,7 +43,7 @@ class Contacto
 
     public function __tostring()
     {
-        return $this->nombre;
+        return (string)$this->nombre;
     }
 
     public function getId()

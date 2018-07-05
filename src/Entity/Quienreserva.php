@@ -73,7 +73,7 @@ class Quienreserva
 
     public function __tostring()
     {
-        return $this->nombre;
+        return (string)$this->titulo;
     }
 
     public function getId()

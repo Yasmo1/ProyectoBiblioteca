@@ -70,7 +70,7 @@ class PlanTrabajoMensual
 
     public function __tostring()
     {
-        return $this->file;
+        return (string)$this->file;
     }
 
     public function getId()

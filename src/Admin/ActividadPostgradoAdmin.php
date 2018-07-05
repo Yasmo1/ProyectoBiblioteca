@@ -20,26 +20,22 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
-class NoticiasAdmin extends AbstractAdmin
+class ActividadPostgradoAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->with('Informacion', ['class' => 'col-md-6'])
-            ->add('titulo')
-            ->add('autor_foto_portada')
-            ->add('publica')
-            ->add('portada')
-            ->add('fecha')
-            ->add('autor_noticia')
-            ->add('categoria')
+            ->add('nombre')
+            ->add('fechainicio')
+            ->add('fechafin')
             ->end()
-            ->with('Resumen e Imagen', ['class' => 'col-md-6'])
-            ->add('resumen')
-            ->add('imageFile', VichImageType::class)
+            ->with('  ', ['class' => 'col-md-6'])
+            ->add('organismosPostgrados')
+            ->add('tipoactividadpostgrado')
             ->end()
-            ->with('Cuerpo', ['class' => 'col-md-12'])
-            ->add('cuerpo', CKEditorType::class)
+            ->with('Resumen e Imagen', ['class' => 'col-md-12'])
+            ->add('descripcion', CKEditorType::class)
             ->end()
 
         ;
@@ -47,26 +43,24 @@ class NoticiasAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('titulo')
-            ->add('autor_foto_portada')
-            ->add('publica')
-            ->add('portada')
-            ->add('fecha')
-            ->add('autor_noticia')
-            ->add('categoria')
+        $datagridMapper
+            ->add('nombre')
+            ->add('fechainicio')
+            ->add('fechafin')
+            ->add('organismosPostgrados')
+            ->add('tipoactividadpostgrado')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('titulo')
-            ->add('portada', 'boolean')
-            ->add('publica', 'boolean')
-            ->add('Categoria')
-            ->add('autor_noticia')
-            ->add('image', null, array(
-                'template' => 'bundles/SonataAdminBundle/image.html.twig'
-            ));
+        $listMapper
+            ->addIdentifier('nombre')
+            ->add('fechainicio')
+            ->add('fechafin')
+            ->add('organismosPostgrados')
+            ->add('tipoactividadpostgrado')
+            ;
 
 
     }

@@ -8,30 +8,26 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class DepartamentosAdmin extends AbstractAdmin
+class GruposDeTrabajoAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Informacion', ['class' => 'col-md-6'])
+            ->with('Meta data', ['class' => 'col-md-4'])
             ->add('nombre', TextType::class)
-            ->add('trabajadores')
-            ->add('descripcion', CKEditorType::class)
-            ;
+            ->add('descripcion', TextareaType::class)
+            ->end()
+        ;
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('nombre')
-            ->add('trabajadores')
-        ;
+        $datagridMapper->add('nombre');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('nombre')
-            ->add('trabajadores')
-        ;
+        $listMapper->addIdentifier('nombre');
     }
 }

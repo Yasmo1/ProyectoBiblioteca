@@ -37,7 +37,7 @@ class Resultados
     private $relevancia;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=20)
      */
     private $anno;
 

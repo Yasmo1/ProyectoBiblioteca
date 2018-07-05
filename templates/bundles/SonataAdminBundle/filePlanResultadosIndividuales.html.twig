@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field %}
+    <div>
+        {% if object.file != null %}
+            <a href="{{ asset('files/documentosPRI/' ~ object.file) }}" download="{{ asset('files/documentosPRI/' ~ object.file) }}">
+                {{  object.file }}
+            </a>
+        {% else %}
+            <span>No picture</span>
+        {% endif %}
+    </div>
+{% endblock %}

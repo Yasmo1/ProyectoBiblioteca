@@ -34,23 +34,185 @@ services:
         class: App\Admin\TematicaNoticiaAdmin
         arguments: [~, App\Entity\TematicaNoticia, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Categorias Noticias }
+            - { name: sonata.admin, manager_type: orm,  group: Noticias, label: Categorias Noticias }
         public: true
     admin.Comentarios:
         class: App\Admin\ComentariosAdmin
         arguments: [~, App\Entity\Comentarios, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Comentarios }
+            - { name: sonata.admin, manager_type: orm, group: Noticias, label: Comentarios }
         public: true
     admin.Noticias:
         class: App\Admin\NoticiasAdmin
         arguments: [~, App\Entity\Noticias, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Noticias }
+            - { name: sonata.admin, manager_type: orm,  group: Noticias, label: Noticias }
         public: true
     admin.RespuestaComentario:
         class: App\Admin\RespuestaComentarioAdmin
         arguments: [~, App\Entity\RespuestaComentario, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Respuesta a Comentarios }
+            - { name: sonata.admin, manager_type: orm, group: Noticias, label: Respuesta a Comentarios }
+        public: true
+    admin.Departamentos:
+        class: App\Admin\DepartamentosAdmin
+        arguments: [~, App\Entity\Departamentos, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CRAI, label: Departamentos }
+        public: true
+    admin.ActividadPostgrado:
+        class: App\Admin\ActividadPostgradoAdmin
+        arguments: [~, App\Entity\ActividadPostgrado, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Formacion, label: Actividades de Postgrado }
+        public: true
+    admin.AsignaturaServicioPregrado:
+        class: App\Admin\AsignaturaServicioPregradoAdmin
+        arguments: [~, App\Entity\AsignaturaServicioPregrado, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Formacion, label: Asignaturas de Pregrado }
+        public: true
+    admin.OrganismosPostgrado:
+        class: App\Admin\OrganismosPostgradoAdmin
+        arguments: [~, App\Entity\OrganismosPostgrado, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,   group: Formacion, label: Organismos }
+        public: true
+    admin.Biblioteca:
+        class: App\Admin\BibliotecaAdmin
+        arguments: [~, App\Entity\Biblioteca, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Bibliotecas, label: Bibliotecas }
+        public: true
+    admin.Carrera:
+        class: App\Admin\CarreraAdmin
+        arguments: [~, App\Entity\Carrera, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Formacion, label: Carreras }
+        public: true
+    admin.CategoriasRecursosInformacion:
+        class: App\Admin\CategoriasRecursosInformacionAdmin
+        arguments: [~, App\Entity\CategoriasRecursosInformacion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Recursos, label: Categorias }
+        public: true
+    admin.Contacto:
+        class: App\Admin\ContactoAdmin
+        arguments: [~, App\Entity\Contacto, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Contacto }
+        public: true
+    admin.Documentos:
+        class: App\Admin\DocumentosAdmin
+        arguments: [~, App\Entity\Documentos, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Documentos }
+        public: true
+    admin.GruposDeTrabajo:
+        class: App\Admin\GruposDeTrabajoAdmin
+        arguments: [~, App\Entity\GruposDeTrabajo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Grupos de Trabajo }
+        public: true
+    admin.Investigaciones:
+        class: App\Admin\InvestigacionesAdmin
+        arguments: [~, App\Entity\Investigaciones, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Investigaciones, label: Investigaciones }
+        public: true
+    admin.Liniainvestigacion:
+        class: App\Admin\LiniainvestigacionAdmin
+        arguments: [~, App\Entity\Liniainvestigacion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Investigaciones, label: Linia de Investigacion }
+        public: true
+    admin.PII:
+        class: App\Admin\PIIAdmin
+        arguments: [~, App\Entity\PII, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Investigaciones, label: Proyectos }
+        public: true
+    admin.PlanResultadosIndividuales:
+        class: App\Admin\PlanResultadosIndividualesAdmin
+        arguments: [~, App\Entity\PlanResultadosIndividuales, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Plan de Resultados Individuales }
+        public: true
+    admin.PlanTrabajoMensual:
+        class: App\Admin\PlanTrabajoMensualAdmin
+        arguments: [~, App\Entity\PlanTrabajoMensual, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Plan de Trabajo Mensual }
+        public: true
+    admin.Quienreserva:
+        class: App\Admin\QuienreservaAdmin
+        arguments: [~, App\Entity\Quienreserva, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Reserva de Salas }
+        public: true
+    admin.RecursosInformacion:
+        class: App\Admin\RecursosInformacionAdmin
+        arguments: [~, App\Entity\RecursosInformacion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Recursos, label: Recursos de la Informacion }
+        public: true
+    admin.Resultados:
+        class: App\Admin\ResultadosAdmin
+        arguments: [~, App\Entity\Resultados, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Investigaciones, label: Resultados }
+        public: true
+    admin.Salas:
+        class: App\Admin\SalasAdmin
+        arguments: [~, App\Entity\Salas, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Bibliotecas, label: Salas }
+        public: true
+    admin.Semestre:
+        class: App\Admin\SemestreAdmin
+        arguments: [~, App\Entity\Semestre, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Formacion, label: Semestre }
+        public: true
+    admin.ServiciosBiblioteca:
+        class: App\Admin\ServiciosBibliotecaAdmin
+        arguments: [~, App\Entity\ServiciosBiblioteca, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Bibliotecas, label: Servicios }
+        public: true
+    admin.SitiosReferencia:
+        class: App\Admin\SitiosReferenciaAdmin
+        arguments: [~, App\Entity\SitiosReferencia, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Sitios de Referencia }
+        public: true
+    admin.SitiosWebCRAI:
+        class: App\Admin\SitiosWebCRAIAdmin
+        arguments: [~, App\Entity\SitiosWebCRAI, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Sitios Web }
+        public: true
+    admin.Tecnologias:
+        class: App\Admin\TecnologiasAdmin
+        arguments: [~, App\Entity\Tecnologias, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Tecnologias }
+        public: true
+    admin.TipoActividadPostgrado:
+        class: App\Admin\TipoActividadPostgradoAdmin
+        arguments: [~, App\Entity\TipoActividadPostgrado, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: Formacion, label: Tipo de Actividad Postgrado }
+        public: true
+    admin.User:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Usuarios }
+        public: true
+    admin.Usuarios:
+        class: App\Admin\UsuariosAdmin
+        arguments: [~, App\Entity\Usuarios, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Trabajadores }
         public: true

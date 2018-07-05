@@ -37,7 +37,7 @@ class Documentos
 
     public function __tostring()
     {
-        return $this->nombre;
+        return (string)$this->nombre;
     }
 
     public function setDocFile(File $doc = null)
@@ -77,6 +77,8 @@ class Documentos
      * @ORM\Column(type="datetime")
      */
     private $fecha;
+
+
 
     public function getId()
     {
