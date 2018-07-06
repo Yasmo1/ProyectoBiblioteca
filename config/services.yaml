@@ -100,13 +100,13 @@ services:
         class: App\Admin\ContactoAdmin
         arguments: [~, App\Entity\Contacto, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Contacto }
+            - { name: sonata.admin, manager_type: orm,  group: otros, label: Contacto }
         public: true
     admin.Documentos:
         class: App\Admin\DocumentosAdmin
         arguments: [~, App\Entity\Documentos, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Documentos }
+            - { name: sonata.admin, manager_type: orm,  group: otros, label: Documentos }
         public: true
     admin.GruposDeTrabajo:
         class: App\Admin\GruposDeTrabajoAdmin
@@ -136,19 +136,19 @@ services:
         class: App\Admin\PlanResultadosIndividualesAdmin
         arguments: [~, App\Entity\PlanResultadosIndividuales, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Plan de Resultados Individuales }
+            - { name: sonata.admin, manager_type: orm,  group: otros, label: Plan de Resultados Individuales }
         public: true
     admin.PlanTrabajoMensual:
         class: App\Admin\PlanTrabajoMensualAdmin
         arguments: [~, App\Entity\PlanTrabajoMensual, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Plan de Trabajo Mensual }
+            - { name: sonata.admin, manager_type: orm,  group: otros, label: Plan de Trabajo Mensual }
         public: true
     admin.Quienreserva:
         class: App\Admin\QuienreservaAdmin
         arguments: [~, App\Entity\Quienreserva, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group: Otros, label: Reserva de Salas }
+            - { name: sonata.admin, manager_type: orm,  group: otros, label: Reserva de Salas }
         public: true
     admin.RecursosInformacion:
         class: App\Admin\RecursosInformacionAdmin
@@ -215,4 +215,10 @@ services:
         arguments: [~, App\Entity\Usuarios, ~]
         tags:
             - { name: sonata.admin, manager_type: orm,  group: CRAI, label: Trabajadores }
+        public: true
+    admin.Vguiada:
+        class: App\Admin\VguiadaAdmin
+        arguments: [~, App\Entity\Vguiada, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,  group: "app.admin.group.otros", label: "Visita Guiada" }
         public: true
