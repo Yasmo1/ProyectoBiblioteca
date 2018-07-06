@@ -45,7 +45,7 @@ class ContactoAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->addIdentifier('nombre')
+            ->add('nombre')
             ->add('pais')
             ->add('correo')
             ->add('trabajo')

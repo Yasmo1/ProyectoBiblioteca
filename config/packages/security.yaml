@@ -42,5 +42,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/seguroadmin, roles: [ROLE_ADMIN] }
-        - { path: ^/adminoticias, roles: [ROLE_USER, ROLE_EDITOR] }
+        - { path: ^/administracioncrai, roles: [ROLE_USER, ROLE_EDITOR] }
         # - { path: ^/profile, roles: ROLE_USER }
