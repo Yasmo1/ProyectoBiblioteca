@@ -42,11 +42,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group:  "app.admin.group.Noticias", label: Comentarios }
         public: true
-    admin.Noticias:
+    admin.Noticias_Usuarios:
         class: App\Admin\NoticiasAdmin
         arguments: [~, App\Entity\Noticias, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm,  group:  "app.admin.group.Noticias", label: Noticias }
+            - { name: sonata.admin, manager_type: orm,  group:  "app.admin.group.NoticiasUsuarios", label: Noticias }
         public: true
     admin.RespuestaComentario:
         class: App\Admin\RespuestaComentarioAdmin

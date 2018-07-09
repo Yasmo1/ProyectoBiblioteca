@@ -29,14 +29,26 @@ class NoticiasAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
 
-        $username = "pep"; //TokenStorage->getToken()->getUsername();
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
-        if($username == "pep")
+        $roles = $user->getRoles();
+        $EsAdminitrativo = false;
+        for($i = 0; $i < count($roles); $i++)
+        {
+            if($roles[$i] == "ROLE_EDITOR" || $roles[$i] == "ROLE_ADMIN" )
+            {
+                $EsAdminitrativo = true;
+            }
+        }
+
+        if($EsAdminitrativo)
         {
             $formMapper
                 ->with('Informacion', ['class' => 'col-md-6'])
                 ->add('titulo')
                 ->add('autor_foto_portada')
+                ->add('publica')
+                ->add('portada')
                 ->add('fecha')
                 ->add('autor_noticia')
                 ->add('categoria')
@@ -54,8 +66,6 @@ class NoticiasAdmin extends AbstractAdmin
                 ->with('Informacion', ['class' => 'col-md-6'])
                 ->add('titulo')
                 ->add('autor_foto_portada')
-                ->add('publica')
-                ->add('portada')
                 ->add('fecha')
                 ->add('autor_noticia')
                 ->add('categoria')

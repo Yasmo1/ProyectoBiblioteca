@@ -11,10 +11,14 @@ sonata_admin:
               settings:
                   groups: [Formacion,Investigaciones , Noticias, Recursos]
         groups:
-            app.admin.group.Noticias:
+            app.admin.group.NoticiasUsuarios:
                 label: Noticias
                 items: ~
-                roles: [ ROLE_USER, ROLE_EDITOR ]
+                roles: [ ROLE_USER]
+            app.admin.group.Noticias:
+                label: Acerca de las Noticias
+                items: ~
+                roles: [ ROLE_EDITOR ]
             app.admin.group.Investigaciones:
                 label: Investigaciones
                 items: ~
