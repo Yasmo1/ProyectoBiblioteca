@@ -99,19 +99,19 @@ class FrontendController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', 'Sus datos fueron enviados satisfacoriamente.');
                 // Aqui enviar la informacion al correo
-                /*$message = \Swift_Message::class;
+               // $message = \Swift_Message::class;
                 $em = $this->getDoctrine()->getManager();
                 //$senders = $em->getRepository('BibliotecaBundle:Backends')->getEmailsFromVG();
-                $message->setFrom("biblioteca@upr.edu.cu")
-                    ->setSubject("Visita Guiada")
-                    ->setTo("yasmany.hernandez@upr.edu.cu")
-                    ->setBody(
-                        $this->renderView('frontend/vg_mail.html.twig', array(
-                            'solicitud' => $entity
-                        ))
-                    )
-                    ->setContentType('text/html');
-                $this->get('mailer')->send($message);*/
+                $message = (new \Swift_Message('Hello Email'))
+                    ->setFrom('yasmany.hernandez@upr.edu.cu')
+                    ->setTo('yasmany.hernandez@upr.edu.cu')
+
+                    ->setBody('papas',
+                        'text/html'
+                    );
+                $enviar = (new \Swift_Mailer(new \Swift_SmtpTransport("profesores.upr.edu.cu")));
+
+                $enviar->send($message);
             }
 
         } else {

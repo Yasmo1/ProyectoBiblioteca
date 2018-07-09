@@ -29,53 +29,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="row">
                             <div class="col-md-12">
-                                {% if error %}
-                                    <script type="text/javascript">
-                                        addLoadEvent = function (func) {
-                                            if (typeof jQuery != "undefined")jQuery(document).ready(func); else if (typeof wpOnload != 'function') {
-                                                wpOnload = func;
-                                            } else {
-                                                var oldonload = wpOnload;
-                                                wpOnload = function () {
-                                                    oldonload();
-                                                    func();
-                                                }
-                                            }
-                                        };
-                                        function s(id, pos) {
-                                            g(id).left = pos + 'px';
-                                        }
-                                        function g(id) {
-                                            return document.getElementById(id).style;
-                                        }
-                                        function shake(id, a, d) {
-                                            c = a.shift();
-                                            s(id, c);
-                                            if (a.length > 0) {
-                                                setTimeout(function () {
-                                                    shake(id, a, d);
-                                                }, d);
-                                            } else {
-                                                try {
-                                                    g(id).position = 'static';
-                                                    wp_attempt_focus();
-                                                } catch (e) {
-                                                }
-                                            }
-                                        }
-                                        addLoadEvent(function () {
-                                            var p = new Array(15, 30, 15, 0, -15, -30, -15, 0);
-                                            p = p.concat(p.concat(p));
-                                            var i = document.forms[0].id;
-                                            g(i).position = 'relative';
-                                            shake(i, p, 20);
-                                        });
-                                    </script>
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        {{ error|trans({}, 'FOSUserBundle') }}
-                                    </div>
-                                {% endif %}
+
                             </div>
                         </div>
                         <form id="loginform" class="" role="form" action="{{ path("fos_user_security_check") }}"

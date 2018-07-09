@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    {% for key, message in app.session %}
+    {% for key, message in app.session.getFlashBag() %}
         <div class="{{ key }}">
             {{ message|trans({}, 'FOSUserBundle') }}
         </div>

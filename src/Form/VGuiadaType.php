@@ -32,11 +32,11 @@ class VGuiadaType extends AbstractType
             ))
             ->add('facultad',ChoiceType::class, array(
                 'choices' => array(
-                    "Forestal y Agronomía",
-                    "Ciencias Técnicas",
-                    "Ciencias Económicas",
-                    "Agronomía de Montaña",
-                    "Ciencias Sociales y Humanísticas"
+                    "Forestal y Agronomía" => "Forestal y Agronomía",
+                    "Ciencias Técnicas" => "Ciencias Técnicas",
+                    "Ciencias Económicas" => "Ciencias Económicas",
+                    "Agronomía de Montaña" => "Agronomía de Montaña",
+                    "Ciencias Sociales y Humanísticas" => "Ciencias Sociales y Humanísticas"
                 ),
                 'attr'=>array(
 
@@ -52,7 +52,13 @@ class VGuiadaType extends AbstractType
                 'label'=>"Carrera",
             ))
             ->add('anno',ChoiceType::class, array(
-                'choices' => array("1ro","2do","3ro","4to","5to"),
+                'choices' => array(
+                    "1ro" => "1ro",
+                    "2do" =>  "2do",
+                    "3ro" => "3ro",
+                    "4to" => "4to",
+                    "5to" => "5to"
+                ),
                 'attr'=>array(
 
                     'class'=>'form-control'

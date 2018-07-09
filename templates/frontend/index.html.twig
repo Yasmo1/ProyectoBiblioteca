@@ -102,6 +102,39 @@
                                         <div class="col-sm-8">
                                             <h3 class="Estilo_Enunciado_Noticias_Portada">{{ news[0].titulo }}</h3>
                                             <div class="Estilo_Noticias_Portada">{{ news[0].resumen }}</div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Facebook"
+                                                           href="javascript: void(0);"
+                                                           onclick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=http://crai.upr.edu.cu/noticias/noticiasAmpliadas/{{ news[0].id }}&p[title]={{ news[0].titulo }}&p[summary]={{ news[0].resumen }}&&p[images][0]= {{ asset('files/images/'~news[0].image) }}',
+                                                                   'popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Twitter"
+                                                           href="javascript: void(0);"onclick="window.open('http://twitter.com/home?status={{ news[0].titulo~"        " }}@Crai_Upr','popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/social19.svg') }} " alt="Twitter">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -118,6 +151,39 @@
                                         <div class="col-sm-8">
                                             <h3 class="Estilo_Enunciado_Noticias_Portada">{{ news[1].titulo }}</h3>
                                             <div class="Estilo_Noticias_Portada">{{ news[1].resumen }}</div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Facebook"
+                                                           href="javascript: void(0);"
+                                                           onclick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=http://crai.upr.edu.cu/noticias/noticiasAmpliadas/{{ news[1].id }}&p[title]={{ news[1].titulo }}&p[summary]={{ news[1].resumen }}&&p[images][0]= {{ asset('files/images/'~news[1].image) }}',
+                                                                   'popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Twitter"
+                                                           href="javascript: void(0);"onclick="window.open('http://twitter.com/home?status={{ news[1].titulo~"        " }}@Crai_Upr','popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/social19.svg') }} " alt="Twitter">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -138,6 +204,39 @@
                                         <div class="col-sm-8">
                                             <h3 class="Estilo_Enunciado_Noticias_Portada">{{ news[2].titulo }}</h3>
                                             <div class="Estilo_Noticias_Portada">{{ news[2].resumen }}</div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Facebook"
+                                                           href="javascript: void(0);"
+                                                           onclick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=http://crai.upr.edu.cu/noticias/noticiasAmpliadas/{{ news[2].id }}&p[title]={{ news[2].titulo }}&p[summary]={{ news[2].resumen }}&&p[images][0]= {{ asset('files/images/'~news[2].image) }}',
+                                                                   'popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Twitter"
+                                                           href="javascript: void(0);"onclick="window.open('http://twitter.com/home?status={{ news[2].titulo~"        " }}@Crai_Upr','popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/social19.svg') }} " alt="Twitter">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -154,6 +253,39 @@
                                         <div class="col-sm-8">
                                             <h3 class="Estilo_Enunciado_Noticias_Portada">{{ news[3].titulo }}</h3>
                                             <div class="Estilo_Noticias_Portada">{{ news[3].resumen }}</div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Facebook"
+                                                           href="javascript: void(0);"
+                                                           onclick="window.open('http://www.facebook.com/sharer.php?s=100&p[url]=http://crai.upr.edu.cu/noticias/noticiasAmpliadas/{{ news[3].id }}&p[title]={{ news[3].titulo }}&p[summary]={{ news[3].resumen }}&&p[images][0]= {{ asset('files/images/'~news[3].image) }}',
+                                                                   'popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/facebook6.svg') }} " alt="Facebook">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2">
+                                                    <div class="circulo1">
+                                                        <a data-container="body"
+                                                           data-toggle="popover"
+                                                           data-trigger="hover"
+                                                           data-placement="top"
+                                                           data-content="Comparte esta noticia en Twitter"
+                                                           href="javascript: void(0);"onclick="window.open('http://twitter.com/home?status={{ news[3].titulo~"        " }}@Crai_Upr','popup', 'toolbar=0, status=0, width=650, height=450');">
+                                                            <img class="img-responsive Mi_pading_Peque"
+                                                                 style="margin: 6px 0 0 6px;" width="20" src="{{ asset('biblioteca/biblioteca/images/social/social19.svg') }} " alt="Twitter">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
