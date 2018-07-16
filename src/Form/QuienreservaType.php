@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Quienreserva;
+use App\Entity\Salas;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -61,7 +62,8 @@ class QuienreservaType extends AbstractType
                     'class' => "form-control",
                     'rows' => "4")
             ))
-            ->add('sala')
+            ->add('sala'
+            )
         ;
     }
 
